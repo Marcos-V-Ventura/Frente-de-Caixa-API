@@ -1,4 +1,4 @@
-create database projeto_pdv_final;
+create database pdv;
 
 create table usuarios (
     id serial primary key,
