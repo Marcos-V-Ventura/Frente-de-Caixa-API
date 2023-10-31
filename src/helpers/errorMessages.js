@@ -1,7 +1,9 @@
 const errorMessages = {
-    categoriaInvalid: "Categoria não encontrada.",
+    invalidCategoria: "Categoria não encontrada.",
+    invalidEmailOrSenha: "Email e/ou senha inválido(s)",
+    invalidToken: "Para acessar este recurso um token de autenticação válido deve ser enviado",
     duplicateEmail: "O e-mail informado já está sendo utilizado por outro usuário",
-    emailOrSenhaInvalid: "Email e/ou senha inválido(s)"
+    server: "Erro interno do servidor."
 } 
 
 module.exports = errorMessages;
