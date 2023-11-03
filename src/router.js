@@ -12,6 +12,7 @@ const {
   editFields,
 } = require("./middlewares/md_users");
 const { listCategories } = require("./controllers/categories");
+const { deleteProductById } = require("./controllers/products");
 
 const router = Router();
 
@@ -23,5 +24,6 @@ router.use(auth);
 
 router.put("/usuario", editFields, editUser);
 router.get("/usuario", userProfile);
+router.delete("/produto/:id", deleteProductById);
 
 module.exports = router;
