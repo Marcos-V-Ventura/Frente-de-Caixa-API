@@ -16,6 +16,23 @@ const validateEmailSenha = yup.object({
     senha: yup.string().required()
 });
 
+const validateRegisterCustomer = yup.object({
+    nome: yup.string().required(),
+    email: yup.string().email().required(),
+    cpf: yup.string().length(11).required()
+})
+
+const validateUpdateCustomer = yup.object({
+    nome: yup.string(),
+    email: yup.string().email(),
+    cpf: yup.string().length(11)
+}).test(
+    'Você deve preencher pelo menos um campo',
+  value => {
+    return value.nome || value.email || value.cpf;
+}
+);
+
 const getUser = async (email) => {
     try {
         const userFound = await knex('usuarios')
@@ -41,4 +58,11 @@ const emailIsRegistered = async (email, id) => {
     }
 }
 
-module.exports = { validateNomeEmailSenha, validateEmailSenha, getUser, emailIsRegistered }
+module.exports = { 
+    validateNomeEmailSenha, 
+    validateEmailSenha, 
+    validateRegisterCustomer,
+    validateUpdateCustomer,
+    getUser, 
+    emailIsRegistered 
+}
