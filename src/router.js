@@ -7,11 +7,11 @@ const router = Router();
 
 router.post("/usuario", registerFields, registerUser);
 router.post("/login", loginFields, login);
+router.get("/categoria", listCategories);
 
 router.use(auth);
 
 router.put("/usuario", editFields, editUser);
 router.get("/usuario", userProfile);
-router.get("/categoria", listCategories);
 
 module.exports = router;
