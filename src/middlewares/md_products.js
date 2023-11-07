@@ -28,7 +28,7 @@ const validateProdutoId = async (req, res, next) => {
     try {
         const productFound = await utils.getProduct(id);
         if(!productFound) 
-            return res.status(404).json({ mensagem: errorMessages.invalidProduto })
+            return res.status(404).json({ mensagem: errorMessages.invalidProducts })
 
         next();
     } catch (error) {
