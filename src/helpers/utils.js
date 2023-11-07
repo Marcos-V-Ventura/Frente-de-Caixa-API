@@ -79,5 +79,6 @@ module.exports = {
     validateRegisterCustomer,
     validateUpdateCustomer,
     getUser, 
-    emailIsRegistered 
+    emailIsRegistered,
+    validateAllFieldsProduct
 }

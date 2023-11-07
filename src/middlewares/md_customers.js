@@ -11,10 +11,10 @@ const customerRegisterFields = async (req, res, next) => {
         await validateRegisterCustomer.validate(req.body);
 
         const find = await knex('clientes')
-        .where({cpf})
-        .orWhere({email})
-        .first();
-        if (find) {return res.status(409).json({mensagem: errorMessages.duplicateEmailCPF});}
+            .where({cpf})
+            .orWhere({email})
+            .first();
+        if (find) {return res.status(409).json({mensagem: errorMessages.invalidEmailOrCpf});}
         
         next()
     } catch (error) {
