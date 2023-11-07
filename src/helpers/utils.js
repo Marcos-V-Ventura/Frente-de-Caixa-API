@@ -31,6 +31,23 @@ const validateAllFieldsProduct = yup.object({
         .typeError(typeErrorNumber("categoria_id")).strict()
 });
 
+const validateRegisterCustomer = yup.object({
+    nome: yup.string().required(),
+    email: yup.string().email().required(),
+    cpf: yup.string().length(11).required()
+})
+
+const validateUpdateCustomer = yup.object({
+    nome: yup.string(),
+    email: yup.string().email(),
+    cpf: yup.string().length(11)
+}).test(
+    'Você deve preencher pelo menos um campo',
+  value => {
+    return value.nome || value.email || value.cpf;
+}
+);
+
 const getUser = async (email) => {
     try {
         const userFound = await knex('usuarios')
@@ -56,28 +73,11 @@ const emailIsRegistered = async (email, id) => {
     }
 }
 
-const getCategory = async (id) => {
-    try {
-        const categoryFound = await knex("categorias")
-            .where({ id })
-            .first();
-        
-        return categoryFound;
-    } catch (error) {
-        return false;
-    }    
+module.exports = { 
+    validateNomeEmailSenha, 
+    validateEmailSenha, 
+    validateRegisterCustomer,
+    validateUpdateCustomer,
+    getUser, 
+    emailIsRegistered 
 }
-
-const getProduct = async (id) => {
-    try {
-        const productFound = await knex("produtos")
-            .where({ id })
-            .first();
-    
-        return productFound;
-    } catch (error) {
-        return false;
-    }
-}
-
-module.exports = { validateNomeEmailSenha, validateEmailSenha, getUser, emailIsRegistered, validateAllFieldsProduct, getCategory, getProduct }

@@ -1,9 +1,8 @@
 const { Router } = require("express");
 const { registerUser, login, editUser, userProfile, getAllClients, getClientById } = require("./controllers/users");
 const { listCategories } = require("./controllers/categories");
-const { deleteProductById, registerProduct, editProduct } = require("./controllers/products");
-const { registerFields, auth, loginFields, editFields } = require("./middlewares/md_users");
-const { validateProdutoId, productFields } = require("./middlewares/md_products");
+const { registerCustomer, editCustomer } = require("./controllers/customers");
+const { customerRegisterFields, customerUpdateFields } = require("./middlewares/md_customers");
 
 const router = Router();
 
@@ -21,5 +20,8 @@ router.get("/cliente/:id", getClientById);
 router.delete("/produto/:id", deleteProductById);
 router.post("/produto", productFields, registerProduct);
 router.put("/produto/:id", productFields, validateProdutoId, editProduct);
+
+router.post('/cliente', customerRegisterFields ,registerCustomer)
+router.put('/cliente/:id', customerUpdateFields, editCustomer)
 
 module.exports = router;
