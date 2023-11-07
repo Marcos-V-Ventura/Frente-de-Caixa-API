@@ -60,6 +60,30 @@ const getUser = async (email) => {
     }
 }
 
+const getCategory = async (id) => {
+    try {
+        const categoryFound = await knex("categorias")
+            .where({ id })
+            .first();
+        
+        return categoryFound;
+    } catch (error) {
+        return false;
+    }    
+}
+
+const getProduct = async (id) => {
+    try {
+        const productFound = await knex("produtos")
+            .where({ id })
+            .first();
+    
+        return productFound;
+    } catch (error) {
+        return false;
+    }
+}
+
 const emailIsRegistered = async (email, id) => {
     try {
         const verifyEmail = await knex("usuarios")
@@ -80,5 +104,7 @@ module.exports = {
     validateUpdateCustomer,
     getUser, 
     emailIsRegistered,
-    validateAllFieldsProduct
+    validateAllFieldsProduct,
+    getProduct,
+    getCategory
 }

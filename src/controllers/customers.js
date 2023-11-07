@@ -7,9 +7,8 @@ const registerCustomer = async (req, res) => {
     
     try {
         const registerCustomer = await knex('clientes')
-        .insert({nome, email, cpf})
-        .returning('*');
-        console.log(registerCustomer);
+            .insert({nome, email, cpf})
+            .returning('*');
         if (!registerCustomer){return res.status(501).json({mensagem: errorMessages.customerWasNotRegistered})}
 
         return res.status(201).json();

@@ -2,8 +2,8 @@ const { Router } = require("express");
 const { registerUser, login, editUser, userProfile, getAllClients, getClientById } = require("./controllers/users");
 const { listCategories } = require("./controllers/categories");
 const { registerCustomer, editCustomer } = require("./controllers/customers");
-const { registerFields, customerUpdateFields,customerRegisterFields } = require("./middlewares/md_customers");
-const { loginFields, editFields } = require("./middlewares/md_users");
+const { customerUpdateFields,customerRegisterFields } = require("./middlewares/md_customers");
+const { loginFields, editFields, auth, registerFields } = require("./middlewares/md_users");
 const { deleteProductById, registerProduct, editProduct } = require("./controllers/products");
 const { productFields, validateProdutoId } = require("./middlewares/md_products");
 
