@@ -66,9 +66,35 @@ const userProfile = (req, res) => {
     }
 };
 
+const getAllClients = async (req, res) => {
+    try {
+        const allClients = await knex("clientes");
+
+        return res.status(200).json(allClients);
+    } catch ({ message }) {
+        return res.status(500).json({ mensagem: errorMessages.server, error: message });
+    }
+};
+
+const getClientById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const client = await knex("clientes").where({ id }).first();
+
+        if (!client) return res.status(404).json({ mensagem: errorMessages.clientNotFound });
+
+        return res.status(200).json(client);
+    } catch ({ message }) {
+        return res.status(500).json({ mensagem: errorMessages.server, error: message });
+    }
+}
+
 module.exports = {
     registerUser,
     login,
     editUser,
     userProfile,
+    getAllClients,
+    getClientById
 };
