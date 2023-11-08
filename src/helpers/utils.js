@@ -44,12 +44,6 @@ const validateAllFieldsProduct = yup.object({
     .strict(),
 });
 
-const validateRegisterAndUpdateCustomer = yup.object({
-  nome: yup.string().required(),
-  email: yup.string().email().required(),
-  cpf: yup.string().length(11).required(),
-});
-
 const getUser = async (email) => {
   try {
     const userFound = await knex("usuarios").where({ email }).first();
@@ -96,7 +90,6 @@ const emailIsRegistered = async (email, id) => {
 module.exports = {
   validateNomeEmailSenha,
   validateEmailSenha,
-  validateRegisterAndUpdateCustomer,
   validateAllFieldsProduct,
   getUser,
   emailIsRegistered,

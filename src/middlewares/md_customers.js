@@ -2,7 +2,8 @@ const knex = require("../connection");
 const yup = require("yup");
 const { pt } = require("yup-locales");
 const errorMessages = require("../helpers/errorMessages");
-const { validateRegisterAndUpdateCustomer } = require("../helpers/utils");
+const validateRegisterAndUpdateCustomer = require("../helpers/schemas_customers");
+
 yup.setLocale(pt);
 
 const customerRegisterFields = async (req, res, next) => {
