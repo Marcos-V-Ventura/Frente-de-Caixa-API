@@ -24,9 +24,9 @@ const customerRegisterFields = async (req, res, next) => {
         next();
     } catch (error) {
         if (error.name == "ValidationError")
-            return res.status(400).json({ message: error.message });
+            return res.status(400).json({ mensagem: error.message });
 
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({ mensagem: error.message });
     }
 };
 
@@ -64,9 +64,9 @@ const customerUpdateFields = async (req, res, next) => {
         next();
     } catch (error) {
         if (error.name == "ValidationError") {
-            return res.status(400).json({ message: error.message });
+            return res.status(400).json({ mensagem: error.message });
         }
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({ mensagem: error.message });
     }
 };
 
