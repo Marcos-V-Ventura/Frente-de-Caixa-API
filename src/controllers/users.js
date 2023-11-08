@@ -49,9 +49,7 @@ const editUser = async (req, res) => {
             .where({ id })
             .returning("*");
 
-        delete user.senha;
-
-        return res.status(200).json(user);
+        return res.status(204).json();
     } catch ({ message }) {
         return res.status(500).json({ mensagem: errorMessages.server, error: message });
     }
