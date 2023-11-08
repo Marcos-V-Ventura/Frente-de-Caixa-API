@@ -8,7 +8,7 @@ const {
   getClientById,
 } = require("./controllers/users");
 const { listCategories } = require("./controllers/categories");
-const { registerCustomer, editCustomer } = require("./controllers/customers");
+const { registerCustomer, updateCustomer } = require("./controllers/customers");
 
 const {
   customerUpdateFields,
@@ -52,6 +52,6 @@ router.get("/produto", listProducts);
 router.get("/produto/:id", detailProducts);
 
 router.post("/cliente", customerRegisterFields, registerCustomer);
-router.put("/cliente/:id", customerUpdateFields, editCustomer);
+router.put("/cliente/:id", customerUpdateFields, updateCustomer);
 
 module.exports = router;

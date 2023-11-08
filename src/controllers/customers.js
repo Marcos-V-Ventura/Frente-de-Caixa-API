@@ -20,14 +20,15 @@ const registerCustomer = async (req, res) => {
   }
 };
 
-const editCustomer = async (req, res) => {
+const updateCustomer = async (req, res) => {
   const { nome, email, cpf } = req.body;
   const { id } = req.params;
   try {
-    const update = await knex("clientes").update({ nome, email, cpf });
-    if (!update.rowCount) {
-      return res.status(501).json({ mensagem: errorMessages.server });
-    }
+    const update = await knex("clientes")
+      .update({ nome, email, cpf })
+      .where({ id })
+      .returning("*")
+      .debug();
 
     return res.status(204).json();
   } catch (error) {
@@ -37,5 +38,5 @@ const editCustomer = async (req, res) => {
 
 module.exports = {
   registerCustomer,
-  editCustomer,
+  updateCustomer,
 };

@@ -6,7 +6,7 @@ const { validateRegisterAndUpdateCustomer } = require("../helpers/utils");
 yup.setLocale(pt);
 
 const customerRegisterFields = async (req, res, next) => {
-  const { nome, email, cpf } = req.body;
+  const { email, cpf } = req.body;
   try {
     await validateRegisterAndUpdateCustomer.validate(req.body);
 
@@ -47,7 +47,7 @@ const customerUpdateFields = async (req, res, next) => {
         .where({ email })
         .whereNot({ id })
         .select("*");
-      if (findDuplicateEmail) {
+      if (findDuplicateEmail.length) {
         return res.status(409).json({ mensagem: errorMessages.duplicateEmail });
       }
     }
@@ -56,7 +56,7 @@ const customerUpdateFields = async (req, res, next) => {
         .where({ cpf })
         .whereNot({ id })
         .select("*");
-      if (findDuplicateCPF) {
+      if (findDuplicateCPF.length) {
         return res.status(409).json({ mensagem: errorMessages.duplicateCPF });
       }
     }
