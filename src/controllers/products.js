@@ -14,52 +14,48 @@ const registerProduct = async (req, res) => {
       categoria_id,
     });
 
-    return res.status(201).json();
-  } catch (error) {
-    if (error.name == "ValidationError")
-      return res.status(400).json({ mensagem: error.message });
+        return res.status(201).json();
+    } catch (error) {
+        if (error.name == "ValidationError")
+            return res.status(400).json({ mensagem: error.message });
 
-    return res
-      .status(500)
-      .json({ error: error.message, message: errorMessages.server });
-  }
-};
+        return res.status(500).json({ error: error.message, message: errorMessages.server });
+    }
+}
 
 const editProduct = async (req, res) => {
-  const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
-  const { id } = req.params;
-  try {
-    const [product] = await knex("produtos")
-      .update({ descricao, quantidade_estoque, valor, categoria_id })
-      .where({ id })
-      .returning("*");
+    const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
+    const { id } = req.params;
+    try {
+        const [product] = await knex("produtos")
+            .update({ descricao, quantidade_estoque, valor, categoria_id })
+            .where({ id })
+            .returning("*");
 
-    return res.status(200).json(product);
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: error.message, message: errorMessages.server });
-  }
-};
+        return res.status(200).json(product);
+    } catch (error) {
+        return res.status(500).json({ error: error.message, message: errorMessages.server });
+    }
+}
 
 const deleteProductById = async (req, res) => {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  try {
-    const findProduct = await knex("produtos").where({ id }).first();
+    try {
+        const findProduct = await knex("produtos").where({ id }).first();
 
-    if (!findProduct) {
-      return res.status(400).json({ mensagem: errorMessages.invalidProducts });
+        if (!findProduct) {
+            return res.status(404).json({ mensagem: errorMessages.invalidProducts });
+        }
+
+        const deleteProduct = await knex("produtos").del().where({ id });
+
+        return res.status(204).send();
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ mensagem: errorMessages.server, error: message });
     }
-
-    const deleteProduct = await knex("produtos").del().where({ id });
-
-    return res.status(204).send();
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ mensagem: errorMessages.server, error: message });
-  }
 };
 const listProducts = async (req, res) => {
   const { categoria_id } = req.query;

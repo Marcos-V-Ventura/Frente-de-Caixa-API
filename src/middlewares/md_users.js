@@ -59,7 +59,7 @@ const editFields = async (req, res, next) => {
 
         next();
     } catch ({ message }) {
-        return res.status(500).json({ mensagem: errorMessages.server, error: message});
+        return res.status(500).json({ mensagem: errorMessages.server, error: message });
     }
 }
 

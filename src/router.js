@@ -9,6 +9,7 @@ const {
 } = require("./controllers/users");
 const { listCategories } = require("./controllers/categories");
 const { registerCustomer, editCustomer } = require("./controllers/customers");
+
 const {
   customerUpdateFields,
   customerRegisterFields,
@@ -50,7 +51,7 @@ router.put("/produto/:id", productFields, validateProdutoId, editProduct);
 router.get("/produto", listProducts);
 router.get("/produto/:id", detailProducts);
 
-router.post("/cliente", customerRegisterFields, registerCustomer);
-router.put("/cliente/:id", customerUpdateFields, editCustomer);
+router.post('/cliente', customerRegisterFields, registerCustomer)
+router.put('/cliente/:id', customerUpdateFields, editCustomer)
 
 module.exports = router;
