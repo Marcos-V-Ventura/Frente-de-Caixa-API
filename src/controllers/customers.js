@@ -1,6 +1,5 @@
 const knex = require("../connection");
 const errorMessages = require("../helpers/errorMessages");
-require("dotenv").config();
 
 const registerCustomer = async (req, res) => {
   const { nome, email, cpf } = req.body;
@@ -10,13 +9,15 @@ const registerCustomer = async (req, res) => {
       .returning("*");
     if (!registerCustomer) {
       return res
-        .status(501)
+        .status(400)
         .json({ mensagem: errorMessages.customerWasNotRegistered });
     }
 
     return res.status(201).json();
-  } catch (error) {
-    return res.status(500).json({ mensagem: errorMessages.server });
+  } catch ({ message }) {
+    return res
+      .status(500)
+      .json({ mensagem: errorMessages.server, error: message });
   }
 };
 
@@ -24,15 +25,16 @@ const updateCustomer = async (req, res) => {
   const { nome, email, cpf } = req.body;
   const { id } = req.params;
   try {
-    const update = await knex("clientes")
+    await knex("clientes")
       .update({ nome, email, cpf })
       .where({ id })
-      .returning("*")
-      .debug();
+      .returning("*");
 
     return res.status(204).json();
-  } catch (error) {
-    return res.status(500).json({ mensagem: errorMessages.server });
+  } catch ({ message }) {
+    return res
+      .status(500)
+      .json({ mensagem: errorMessages.server, error: message });
   }
 };
 
