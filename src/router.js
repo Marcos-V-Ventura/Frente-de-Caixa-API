@@ -1,35 +1,38 @@
 const { Router } = require("express");
 const {
-    registerUser,
-    login,
-    editUser,
-    userProfile,
-    getAllClients,
-    getClientById,
+  registerUser,
+  login,
+  userProfile,
+  updateUser,
 } = require("./controllers/users");
 const { listCategories } = require("./controllers/categories");
-const { registerCustomer, updateCustomer } = require("./controllers/customers");
+const {
+  registerCustomer,
+  updateCustomer,
+  getAllCustomers,
+  getCustomerById,
+} = require("./controllers/customers");
 
 const {
-    customerUpdateFields,
-    customerRegisterFields,
+  customerUpdateFields,
+  customerRegisterFields,
 } = require("./middlewares/md_customers");
 const {
-    loginFields,
-    editFields,
-    auth,
-    registerFields,
+  loginFields,
+  editFields,
+  auth,
+  registerFields,
 } = require("./middlewares/md_users");
 const {
-    deleteProductById,
-    registerProduct,
-    editProduct,
-    listProducts,
-    detailProducts,
+  deleteProductById,
+  registerProduct,
+  listProducts,
+  detailProducts,
+  updateProduct,
 } = require("./controllers/products");
 const {
-    productFields,
-    validateProdutoId,
+  productFields,
+  validateProdutoId,
 } = require("./middlewares/md_products");
 
 const router = Router();
@@ -40,14 +43,14 @@ router.get("/categoria", listCategories);
 
 router.use(auth);
 
-router.put("/usuario", editFields, editUser);
+router.put("/usuario", editFields, updateUser);
 router.get("/usuario", userProfile);
 router.get("/categoria", listCategories);
-router.get("/cliente", getAllClients);
-router.get("/cliente/:id", getClientById);
+router.get("/cliente", getAllCustomers);
+router.get("/cliente/:id", getCustomerById);
 router.delete("/produto/:id", deleteProductById);
 router.post("/produto", productFields, registerProduct);
-router.put("/produto/:id", productFields, validateProdutoId, editProduct);
+router.put("/produto/:id", productFields, validateProdutoId, updateProduct);
 router.get("/produto", listProducts);
 router.get("/produto/:id", detailProducts);
 
