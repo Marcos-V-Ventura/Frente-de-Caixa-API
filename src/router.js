@@ -1,35 +1,35 @@
 const { Router } = require("express");
 const {
-  registerUser,
-  login,
-  editUser,
-  userProfile,
-  getAllClients,
-  getClientById,
+    registerUser,
+    login,
+    editUser,
+    userProfile,
+    getAllClients,
+    getClientById,
 } = require("./controllers/users");
 const { listCategories } = require("./controllers/categories");
 const { registerCustomer, updateCustomer } = require("./controllers/customers");
 
 const {
-  customerUpdateFields,
-  customerRegisterFields,
+    customerUpdateFields,
+    customerRegisterFields,
 } = require("./middlewares/md_customers");
 const {
-  loginFields,
-  editFields,
-  auth,
-  registerFields,
+    loginFields,
+    editFields,
+    auth,
+    registerFields,
 } = require("./middlewares/md_users");
 const {
-  deleteProductById,
-  registerProduct,
-  editProduct,
-  listProducts,
-  detailProducts,
+    deleteProductById,
+    registerProduct,
+    editProduct,
+    listProducts,
+    detailProducts,
 } = require("./controllers/products");
 const {
-  productFields,
-  validateProdutoId,
+    productFields,
+    validateProdutoId,
 } = require("./middlewares/md_products");
 
 const router = Router();
