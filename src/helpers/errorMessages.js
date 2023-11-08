@@ -7,7 +7,7 @@ const errorMessages = {
     duplicateCPF: "O CPF informado já está sendo utilizado por outro usuário",
     server: "Erro interno do servidor.",
     customerNotFound: "Cliente não encontrado",
-    customerWasNotRegistered : "Cliente não foi cadastrado.",
+    customerWasNotRegistered: "Cliente não foi cadastrado.",
     server: "Erro interno do servidor.",
     clientNotFound: "Cliente não encontrado.",
     invalidProducts: "Produto não encontrado.",

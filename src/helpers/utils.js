@@ -1,34 +1,34 @@
 const knex = require("../connection");
 const yup = require("yup");
 const { pt } = require("yup-locales");
-const { typeErrorString, typeErrorNumber }= require("./errorMessages");
+const { typeErrorString, typeErrorNumber } = require("./errorMessages");
 yup.setLocale(pt);
 
 const validateNomeEmailSenha = yup.object({
     nome: yup.string().required()
-        .typeError(typeErrorString("nome")).strict(),
+        .typeError(typeErrorString("Nome")).strict(),
     email: yup.string().email().required()
-        .typeError(typeErrorString("descricao")).strict(),
+        .typeError(typeErrorString("Email")).strict(),
     senha: yup.string().required()
-        .typeError(typeErrorString("descricao")).strict()
+        .typeError(typeErrorString("Senha")).strict()
 });
 
 const validateEmailSenha = yup.object({
     email: yup.string().email().required()
-        .typeError(typeErrorString("email")).strict(),
+        .typeError(typeErrorString("Email")).strict(),
     senha: yup.string().required()
-        .typeError(typeErrorString("senha")).strict()
+        .typeError(typeErrorString("Senha")).strict()
 });
 
 const validateAllFieldsProduct = yup.object({
-    descricao: yup.string('FFF').required()
-        .typeError(typeErrorString("descricao")).strict(),
+    descricao: yup.string().required()
+        .typeError(typeErrorString("Descricao")).strict(),
     quantidade_estoque: yup.number().required()
-        .typeError(typeErrorNumber("quantidade_estoque")).strict(),
+        .typeError(typeErrorNumber("Quantidade_estoque")).strict(),
     valor: yup.number().required()
-        .typeError(typeErrorNumber("valor")).strict(),
+        .typeError(typeErrorNumber("Valor")).strict(),
     categoria_id: yup.number().required()
-        .typeError(typeErrorNumber("categoria_id")).strict()
+        .typeError(typeErrorNumber("Categoria_id")).strict()
 });
 
 const validateRegisterCustomer = yup.object({
@@ -43,9 +43,9 @@ const validateUpdateCustomer = yup.object({
     cpf: yup.string().length(11)
 }).test(
     'Você deve preencher pelo menos um campo',
-  value => {
-    return value.nome || value.email || value.cpf;
-}
+    value => {
+        return value.nome || value.email || value.cpf;
+    }
 );
 
 const getUser = async (email) => {
@@ -65,11 +65,11 @@ const getCategory = async (id) => {
         const categoryFound = await knex("categorias")
             .where({ id })
             .first();
-        
+
         return categoryFound;
     } catch (error) {
         return false;
-    }    
+    }
 }
 
 const getProduct = async (id) => {
@@ -77,7 +77,7 @@ const getProduct = async (id) => {
         const productFound = await knex("produtos")
             .where({ id })
             .first();
-    
+
         return productFound;
     } catch (error) {
         return false;
@@ -97,12 +97,12 @@ const emailIsRegistered = async (email, id) => {
     }
 }
 
-module.exports = { 
-    validateNomeEmailSenha, 
-    validateEmailSenha, 
+module.exports = {
+    validateNomeEmailSenha,
+    validateEmailSenha,
     validateRegisterCustomer,
     validateUpdateCustomer,
-    getUser, 
+    getUser,
     emailIsRegistered,
     validateAllFieldsProduct,
     getProduct,

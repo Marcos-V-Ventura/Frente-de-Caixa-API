@@ -3,27 +3,26 @@ const errorMessages = require('../helpers/errorMessages');
 require('dotenv').config();
 
 const registerCustomer = async (req, res) => {
-    const {nome, email, cpf} = req.body
-    
+    const { nome, email, cpf } = req.body
     try {
         const registerCustomer = await knex('clientes')
-            .insert({nome, email, cpf})
+            .insert({ nome, email, cpf })
             .returning('*');
-        if (!registerCustomer){return res.status(501).json({mensagem: errorMessages.customerWasNotRegistered})}
+        if (!registerCustomer) { return res.status(501).json({ mensagem: errorMessages.customerWasNotRegistered }) }
 
         return res.status(201).json();
     } catch (error) {
-        return res.status(500).json({mensagem: errorMessages.server})
+        return res.status(500).json({ mensagem: errorMessages.server })
     }
 }
 
 const editCustomer = async (req, res) => {
-    const {nome, email, cpf} = req.body;
+    const { nome, email, cpf } = req.body;
     const { id } = req.params;
     try {
         let queryParams = [];
-        
-        if (nome){ 
+
+        if (nome) {
             const paramsNome = `nome = '${nome}'`;
             queryParams.push(paramsNome);
         }
@@ -35,17 +34,17 @@ const editCustomer = async (req, res) => {
             const paramsCPF = `cpf = '${cpf}'`;
             queryParams.push(paramsCPF);
         }
-        
+
         const update = await knex.raw(`UPDATE clientes SET ${queryParams} WHERE id = ?`, [id]);
-        if(!update.rowCount) {return res.status(501).json({mensagem: errorMessages.server})}
-        
+        if (!update.rowCount) { return res.status(501).json({ mensagem: errorMessages.server }) }
+
         return res.status(204).json()
     } catch (error) {
-        return res.status(500).json({mensagem: errorMessages.server})
+        return res.status(500).json({ mensagem: errorMessages.server })
     }
 }
 
-module.exports = { 
+module.exports = {
     registerCustomer,
     editCustomer
 }
