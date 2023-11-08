@@ -51,7 +51,7 @@ router.put("/produto/:id", productFields, validateProdutoId, editProduct);
 router.get("/produto", listProducts);
 router.get("/produto/:id", detailProducts);
 
-router.post('/cliente', customerRegisterFields, registerCustomer)
-router.put('/cliente/:id', customerUpdateFields, editCustomer)
+router.post("/cliente", customerRegisterFields, registerCustomer);
+router.put("/cliente/:id", customerUpdateFields, editCustomer);
 
 module.exports = router;
