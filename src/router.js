@@ -47,7 +47,6 @@ router.get("/cliente/:id", getClientById);
 router.delete("/produto/:id", deleteProductById);
 router.post("/produto", productFields, registerProduct);
 router.put("/produto/:id", productFields, validateProdutoId, editProduct);
-
 router.get("/produto", listProducts);
 router.get("/produto/:id", detailProducts);
 
