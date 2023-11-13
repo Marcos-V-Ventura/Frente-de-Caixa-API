@@ -4,6 +4,8 @@ const utils = require("../helpers/utils");
 
 const registerProduct = async (req, res) => {
     const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
+    const { file } = req;
+    console.log(file)
 
     try {
         await knex("produtos").insert({

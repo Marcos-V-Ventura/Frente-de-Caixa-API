@@ -16,7 +16,8 @@ create table produtos(
     descricao text,
     quantidade_estoque integer not null,
     valor integer not null,
-    categoria_id integer not null references categorias(id)
+    categoria_id integer not null references categorias(id),
+    produto_imagem text
 );
 
 create table clientes(
@@ -30,6 +31,21 @@ create table clientes(
     bairro text,
     cidade text,
     estado text
+);
+
+create table pedidos(
+    id serial primary key,
+    cliente_id integer not null references clientes(id),
+    observacao text,
+    valor_total integer
+);
+
+create table pedido_produtos(
+    id serial primary key,
+    pedido_id integer not null references pedidos(id),
+    produto_id integer not null references produtos(id),
+    quantidade_produto integer not null check(quantidade_produto > 0),
+    valor_produto integer not null
 );
 
 INSERT INTO categorias (descricao)

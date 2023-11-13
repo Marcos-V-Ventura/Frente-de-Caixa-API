@@ -33,6 +33,7 @@ const {
 const {
     productFields,
     validateProdutoId,
+    multer
 } = require("./middlewares/md_products");
 
 const router = Router();
@@ -49,8 +50,8 @@ router.get("/categoria", listCategories);
 router.get("/cliente", getAllCustomers);
 router.get("/cliente/:id", getCustomerById);
 router.delete("/produto/:id", deleteProductById);
-router.post("/produto", productFields, registerProduct);
-router.put("/produto/:id", productFields, validateProdutoId, updateProduct);
+router.post("/produto", multer.single('productImage'), productFields, registerProduct);
+router.put("/produto/:id", multer.single('productImage'), productFields, validateProdutoId, updateProduct);
 router.get("/produto", listProducts);
 router.get("/produto/:id", detailProducts);
 

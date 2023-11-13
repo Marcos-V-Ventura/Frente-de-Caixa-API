@@ -1,4 +1,5 @@
 const yup = require("yup");
+const multer = require("multer");
 const { pt } = require("yup-locales");
 const errorMessages = require("../helpers/errorMessages");
 const utils = require("../helpers/utils");
@@ -13,6 +14,7 @@ const productFields = async (req, res, next) => {
             quantidade_estoque,
             valor,
             categoria_id,
+            produto_imagem
         });
 
         const category = await utils.getCategory(categoria_id);
@@ -46,4 +48,4 @@ const validateProdutoId = async (req, res, next) => {
     }
 };
 
-module.exports = { productFields, validateProdutoId };
+module.exports = { productFields, validateProdutoId, multer: multer() };
