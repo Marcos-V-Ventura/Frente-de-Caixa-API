@@ -84,7 +84,6 @@ const updateQuantityProduct = async (pedido_produtos) => {
             await knex('produtos').where({ id: product.produto_id }).update({ quantidade_estoque: updatedQuantity })
         }
     } catch (error) {
-        console.log(error.message);
         return false;
     }
 }
@@ -98,7 +97,6 @@ const insertPedidoProduto = async (pedido_produtos, orderFullId) => {
         }
         await updateQuantityProduct(pedido_produtos)
     } catch (error) {
-        console.log(error.message);
         return false;
     }
 }
