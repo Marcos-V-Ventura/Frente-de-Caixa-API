@@ -59,3 +59,4 @@ router.post("/cliente", customerRegisterFields, registerCustomer);
 router.put("/cliente/:id", customerUpdateFields, updateCustomer);
 
 module.exports = router;
+

@@ -1,4 +1,4 @@
-const knex = require("../connection");
+const { knex } = require("../connection");
 const errorMessages = require("../helpers/errorMessages");
 
 const registerCustomer = async (req, res) => {

@@ -26,7 +26,11 @@ const validateAllFieldsProduct = yup.object({
         .typeError(typeErrorNumber("Categoria_id"))
         .strict(),
     produto_imagem: yup
-        .string()
+        .object({
+            originalname: yup.string().required(),
+            buffer: yup.mixed().required(),
+            mimetype: yup.string().required()
+        })
         .strict()
 });
 

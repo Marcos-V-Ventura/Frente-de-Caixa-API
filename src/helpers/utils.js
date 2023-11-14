@@ -1,4 +1,4 @@
-const knex = require("../connection");
+const { knex, s3 } = require("../connection");
 const yup = require("yup");
 const { pt } = require("yup-locales");
 
@@ -57,10 +57,26 @@ const emailIsRegistered = async (email, id) => {
     }
 };
 
+const setProductImage = async (data) => {
+    try {
+        const file = await s3.upload({
+            Bucket: process.env.KEY_NAME,
+            Key: data.originalname,
+            Body: data.buffer,
+            ContentType: data.mimetype
+        }).promise();
+
+        return file;
+    } catch (error) {
+        return false;
+    }
+}
+
 module.exports = {
     getUser,
     emailIsRegistered,
     getProduct,
     getCategory,
     getClient,
+    setProductImage
 };

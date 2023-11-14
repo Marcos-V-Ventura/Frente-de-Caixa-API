@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const knex = require("../connection");
+const { knex } = require("../connection");
 const jwt = require("jsonwebtoken");
 const yup = require("yup");
 const { pt } = require("yup-locales");
