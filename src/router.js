@@ -34,6 +34,8 @@ const {
     productFields,
     validateProdutoId,
 } = require("./middlewares/md_products");
+const { registerOrder } = require("./controllers/orders");
+const { orderFields } = require("./middlewares/md_orders");
 
 const router = Router();
 
@@ -56,5 +58,7 @@ router.get("/produto/:id", detailProducts);
 
 router.post("/cliente", customerRegisterFields, registerCustomer);
 router.put("/cliente/:id", customerUpdateFields, updateCustomer);
+
+router.post("/pedido", orderFields, registerOrder);
 
 module.exports = router;
