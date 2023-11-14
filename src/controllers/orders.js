@@ -27,6 +27,9 @@ const listOrders = async (req, res) => {
       return res.status(202).json(objectListOrder);
     } else if (!cliente_id) {
       const listOrder = await knex("pedidos").returning("*");
+      if (!listOrder.length) {
+        res.status(400).json({ messagem: errorMessages.orderNotfound });
+      }
       const listProductOrder = await knex("pedido_produtos").returning("*");
 
       const pedido = listOrder;
