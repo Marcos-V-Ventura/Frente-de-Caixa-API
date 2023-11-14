@@ -1,39 +1,40 @@
 const { Router } = require("express");
 const {
-    registerUser,
-    login,
-    userProfile,
-    updateUser,
+  registerUser,
+  login,
+  userProfile,
+  updateUser,
 } = require("./controllers/users");
 const { listCategories } = require("./controllers/categories");
 const {
-    registerCustomer,
-    updateCustomer,
-    getAllCustomers,
-    getCustomerById,
+  registerCustomer,
+  updateCustomer,
+  getAllCustomers,
+  getCustomerById,
 } = require("./controllers/customers");
 
 const {
-    customerUpdateFields,
-    customerRegisterFields,
+  customerUpdateFields,
+  customerRegisterFields,
 } = require("./middlewares/md_customers");
 const {
-    loginFields,
-    editFields,
-    auth,
-    registerFields,
+  loginFields,
+  editFields,
+  auth,
+  registerFields,
 } = require("./middlewares/md_users");
 const {
-    deleteProductById,
-    registerProduct,
-    listProducts,
-    detailProducts,
-    updateProduct,
+  deleteProductById,
+  registerProduct,
+  listProducts,
+  detailProducts,
+  updateProduct,
 } = require("./controllers/products");
 const {
-    productFields,
-    validateProdutoId,
+  productFields,
+  validateProdutoId,
 } = require("./middlewares/md_products");
+const { listOrders } = require("./controllers/orders");
 
 const router = Router();
 
@@ -56,5 +57,7 @@ router.get("/produto/:id", detailProducts);
 
 router.post("/cliente", customerRegisterFields, registerCustomer);
 router.put("/cliente/:id", customerUpdateFields, updateCustomer);
+
+router.get("/pedido", listOrders);
 
 module.exports = router;
