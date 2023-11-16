@@ -73,6 +73,6 @@ router.post("/cliente", customerRegisterFields, registerCustomer);
 router.put("/cliente/:id", customerUpdateFields, updateCustomer);
 
 router.post("/pedido", orderFields, registerOrder);
-router.get("/pedido/:id", listOrders);
+router.get("/pedido", listOrders);
 
 module.exports = router;
