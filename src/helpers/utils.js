@@ -1,4 +1,4 @@
-const knex = require("../connection");
+const { knex, s3 } = require("../connection");
 const yup = require("yup");
 const { pt } = require("yup-locales");
 
@@ -57,6 +57,21 @@ const emailIsRegistered = async (email, id) => {
     }
 };
 
+const setProductImage = async (data) => {
+    try {
+        const file = await s3.upload({
+            Bucket: process.env.KEY_NAME,
+            Key: data.originalname,
+            Body: data.buffer,
+            ContentType: data.mimetype
+        }).promise();
+
+        return file;
+    } catch (error) {
+      return false;
+    }
+};
+
 const checkStockProduct = async (id, quantity) => {
     try {
         const quantityAproved = await knex("produtos").where({ id }).andWhere('quantidade_estoque', '>=', quantity).andWhere(quantity, '>=', 1).first();
@@ -86,7 +101,7 @@ const updateQuantityProduct = async (pedido_produtos) => {
     } catch (error) {
         return false;
     }
-}
+};
 
 const insertPedidoProduto = async (pedido_produtos, orderFullId) => {
     try {
@@ -112,7 +127,7 @@ const getOrderTotalValue = async (pedido_produtos) => {
     } catch (error) {
         return false;
     }
-}
+};
 
 module.exports = {
     getUser,
@@ -120,6 +135,7 @@ module.exports = {
     getProduct,
     getCategory,
     getClient,
+    setProductImage,
     checkStockProduct,
     checkMinimumQuantityProduct,
     updateQuantityProduct,

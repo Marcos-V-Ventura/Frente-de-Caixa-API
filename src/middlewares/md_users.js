@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const knex = require("../connection");
+const { knex } = require("../connection");
 const jwt = require("jsonwebtoken");
 const yup = require("yup");
 const { pt } = require("yup-locales");
@@ -104,8 +104,9 @@ const auth = async (req, res, next) => {
 };
 
 module.exports = {
-  registerFields,
-  loginFields,
-  updateFields,
-  auth,
+    registerFields,
+    loginFields,
+    editFields,
+    updateFields,
+    auth
 };
