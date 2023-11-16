@@ -31,9 +31,9 @@ const {
   updateProduct,
 } = require("./controllers/products");
 const {
-    productFields,
-    validateProdutoId,
-    multer
+  productFields,
+  validateProdutoId,
+  multer,
 } = require("./middlewares/md_products");
 const { registerOrder } = require("./controllers/orders");
 const { orderFields } = require("./middlewares/md_orders");
@@ -52,8 +52,19 @@ router.get("/categoria", listCategories);
 router.get("/cliente", getAllCustomers);
 router.get("/cliente/:id", getCustomerById);
 router.delete("/produto/:id", deleteProductById);
-router.post("/produto", multer.single('productImage'), productFields, registerProduct);
-router.put("/produto/:id", multer.single('productImage'), productFields, validateProdutoId, updateProduct);
+router.post(
+  "/produto",
+  multer.single("productImage"),
+  productFields,
+  registerProduct
+);
+router.put(
+  "/produto/:id",
+  multer.single("productImage"),
+  productFields,
+  validateProdutoId,
+  updateProduct
+);
 router.get("/produto", listProducts);
 router.get("/produto/:id", detailProducts);
 

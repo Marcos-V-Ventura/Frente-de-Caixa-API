@@ -104,9 +104,9 @@ const auth = async (req, res, next) => {
 };
 
 module.exports = {
-    registerFields,
-    loginFields,
-    editFields,
-    updateFields,
-    auth
+  registerFields,
+  loginFields,
+  updateFields,
+  updateFields,
+  auth,
 };

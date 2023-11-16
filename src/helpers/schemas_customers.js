@@ -1,6 +1,6 @@
 const yup = require("yup");
 const { pt } = require("yup-locales");
-const { typeErrorString, typeErrorNumber } = require("./errorMessages");
+const { typeErrorString } = require("./errorMessages");
 yup.setLocale(pt);
 
 const validateRegisterAndUpdateCustomer = yup.object({
@@ -17,6 +17,12 @@ const validateRegisterAndUpdateCustomer = yup.object({
     .typeError(typeErrorString("CPF"))
     .required()
     .strict(),
+  cep: yup.string().length(9).strict(),
+  rua: yup.string().strict(),
+  numero: yup.string().strict(),
+  bairro: yup.string().strict(),
+  cidade: yup.string().strict(),
+  estado: yup.string().strict(),
 });
 
 module.exports = validateRegisterAndUpdateCustomer;

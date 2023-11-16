@@ -3,10 +3,11 @@ const errorMessages = require("../helpers/errorMessages");
 const utils = require("../helpers/utils");
 
 const registerCustomer = async (req, res) => {
-  const { nome, email, cpf } = req.body;
+  const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } =
+    req.body;
   try {
     const registerCustomer = await knex("clientes")
-      .insert({ nome, email, cpf })
+      .insert({ nome, email, cpf, cep, rua, numero, bairro, cidade, estado })
       .returning("*");
     if (!registerCustomer) {
       return res
@@ -23,11 +24,12 @@ const registerCustomer = async (req, res) => {
 };
 
 const updateCustomer = async (req, res) => {
-  const { nome, email, cpf } = req.body;
+  const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } =
+    req.body;
   const { id } = req.params;
   try {
     await knex("clientes")
-      .update({ nome, email, cpf })
+      .update({ nome, email, cpf, cep, rua, numero, bairro, cidade, estado })
       .where({ id })
       .returning("*");
 
