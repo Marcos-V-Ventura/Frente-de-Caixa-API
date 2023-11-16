@@ -27,18 +27,12 @@ const validateAllFieldsOrders = yup.object({
           .number()
           .required(yupMessages.requiredQuantityProduct)
           .typeError(typeErrorNumber("Quantidade_produto"))
-          .strict()
+          .strict(),
       })
     )
     .min(1, yupMessages.minOrderProduct)
-    .required()
     .typeError(typeErrorArray("Pedido_produtos"))
-    .strict(),
-});
-
-
-const validateNumberCustomerId = yup.object({
-  cliente_id: yup.number()
+    .strict()
 })
 
-module.exports = { validateAllFieldsOrders, validateNumberCustomerId };
+module.exports = { validateAllFieldsOrders };

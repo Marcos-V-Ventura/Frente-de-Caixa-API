@@ -10,6 +10,7 @@ const errorMessages = {
   server: "Erro interno do servidor.",
   customerWasNotRegistered: "Cliente não foi cadastrado.",
   clientIdMusteBeNumber: "O valor precisa ser um número",
+  orderNotfound: "Pedido(s) não encontrado(s)",
   customerNotFound: (id) => `Cliente com ID ${id} não foi encontrado`,
   productNotFound: (id) => `Produto com ID ${id} não foi encontrado.`,
   typeErrorString: (name) => `${name} deve ser uma string.`,

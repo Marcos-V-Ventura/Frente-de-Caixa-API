@@ -3,6 +3,7 @@ const yup = require("yup");
 const { pt } = require("yup-locales");
 const errorMessages = require("../helpers/errorMessages");
 const validateRegisterAndUpdateCustomer = require("../helpers/schemas_customers");
+const { validateId } = require("../helpers/schemas_id");
 
 yup.setLocale(pt);
 
@@ -34,6 +35,7 @@ const customerUpdateFields = async (req, res, next) => {
 
     try {
         await validateRegisterAndUpdateCustomer.validate(req.body);
+        await validateId.validate(id);
 
         const findId = await knex("clientes").where({ id }).returning("*");
 
@@ -67,6 +69,8 @@ const customerUpdateFields = async (req, res, next) => {
         return res.status(500).json({ mensagem: error.message });
     }
 };
+
+
 
 module.exports = {
     customerRegisterFields,

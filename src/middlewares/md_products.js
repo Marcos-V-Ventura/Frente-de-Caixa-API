@@ -4,6 +4,7 @@ const { pt } = require("yup-locales");
 const errorMessages = require("../helpers/errorMessages");
 const utils = require("../helpers/utils");
 const validateAllFieldsProduct = require("../helpers/schemas_products");
+const { validateId } = require("../helpers/schemas_id");
 yup.setLocale(pt);
 
 const productFields = async (req, res, next) => {
@@ -40,6 +41,7 @@ const productFields = async (req, res, next) => {
 const validateProdutoId = async (req, res, next) => {
     const { id } = req.params;
     try {
+        await validateId.validate(id)
         const productFound = await utils.getProduct(id);
         if (!productFound) {
             return res.status(404).json({ mensagem: errorMessages.productNotFound(id) });

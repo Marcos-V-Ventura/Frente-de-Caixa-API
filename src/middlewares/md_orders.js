@@ -2,13 +2,14 @@ const yup = require("yup");
 const { pt } = require("yup-locales");
 const errorMessages = require("../helpers/errorMessages");
 const utils = require("../helpers/utils");
-const validateAllFieldsOrders = require("../helpers/schemas_orders");
+const { validateAllFieldsOrders } = require("../helpers/schemas_orders");
 yup.setLocale(pt);
 
 const orderFields = async (req, res, next) => {
     const { cliente_id, pedido_produtos } = req.body;
     try {
         await validateAllFieldsOrders.validate(req.body)
+
         if (!await utils.getClient(cliente_id)) {
             return res.status(404).json({ mensagem: errorMessages.customerNotFound(cliente_id) });
         }
