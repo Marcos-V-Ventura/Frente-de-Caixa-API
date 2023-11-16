@@ -1,40 +1,42 @@
 const { Router } = require("express");
 const {
-    registerUser,
-    login,
-    userProfile,
-    updateUser,
+  registerUser,
+  login,
+  userProfile,
+  updateUser,
 } = require("./controllers/users");
 const { listCategories } = require("./controllers/categories");
 const {
-    registerCustomer,
-    updateCustomer,
-    getAllCustomers,
-    getCustomerById,
+  registerCustomer,
+  updateCustomer,
+  getAllCustomers,
+  getCustomerById,
 } = require("./controllers/customers");
 
 const {
-    customerUpdateFields,
-    customerRegisterFields,
+  customerUpdateFields,
+  customerRegisterFields,
 } = require("./middlewares/md_customers");
 const {
-    loginFields,
-    editFields,
-    auth,
-    registerFields,
+  loginFields,
+  auth,
+  registerFields,
+  updateFields,
 } = require("./middlewares/md_users");
 const {
-    deleteProductById,
-    registerProduct,
-    listProducts,
-    detailProducts,
-    updateProduct,
+  deleteProductById,
+  registerProduct,
+  listProducts,
+  detailProducts,
+  updateProduct,
 } = require("./controllers/products");
 const {
     productFields,
     validateProdutoId,
     multer
 } = require("./middlewares/md_products");
+const { registerOrder } = require("./controllers/orders");
+const { orderFields } = require("./middlewares/md_orders");
 
 const router = Router();
 
@@ -44,7 +46,7 @@ router.get("/categoria", listCategories);
 
 router.use(auth);
 
-router.put("/usuario", editFields, updateUser);
+router.put("/usuario", updateFields, updateUser);
 router.get("/usuario", userProfile);
 router.get("/categoria", listCategories);
 router.get("/cliente", getAllCustomers);
@@ -58,5 +60,6 @@ router.get("/produto/:id", detailProducts);
 router.post("/cliente", customerRegisterFields, registerCustomer);
 router.put("/cliente/:id", customerUpdateFields, updateCustomer);
 
-module.exports = router;
+router.post("/pedido", orderFields, registerOrder);
 
+module.exports = router;
