@@ -15,8 +15,16 @@ const errorMessages = {
   invalidProducts: "Produto não encontrado.",
   orderNotfound: "Pedido(s) não encontrado(s)",
   clientIdMusteBeNumber: "O valor precisa ser um número",
+  productNotFound: (id) => `Produto com ID ${id} não foi encontrado.`,
   typeErrorString: (name) => `${name} deve ser uma string.`,
-  typeErrorNumber: (name) => `${name} deve ser um number.`,
+  typeErrorNumber: (name) => `${name} deve ser um número.`,
+  typeErrorArray: (name) => `${name} deve ser um array.`,
+  isValidQuantityProduct: (id, quantidade) =>
+    `Quantidade informada (${quantidade}) para o produto de ID ${id} deve ser MAIOR ou IGUAL a 1.`,
+  hasSufficientStockProduct: (id, quantidade) =>
+    `Quantidade informada (${quantidade}) para o produto de ID ${id} está indisponível`,
+  linkedProduct: (findProductOrder) =>
+    `O produto ao qual deseja deletar esta vinculado ao pedido_produtos com ID ${findProductOrder}!`,
 };
 
 module.exports = errorMessages;

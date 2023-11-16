@@ -25,6 +25,13 @@ const validateAllFieldsProduct = yup.object({
         .required()
         .typeError(typeErrorNumber("Categoria_id"))
         .strict(),
+    produto_imagem: yup
+        .object({
+            originalname: yup.string().required(),
+            buffer: yup.mixed().required(),
+            mimetype: yup.string().required()
+        })
+        .strict()
 });
 
 module.exports = validateAllFieldsProduct;

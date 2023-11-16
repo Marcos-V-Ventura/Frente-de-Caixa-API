@@ -1,4 +1,4 @@
-const knex = require("../connection");
+const { knex } = require("../connection");
 const yup = require("yup");
 const { pt } = require("yup-locales");
 const errorMessages = require("../helpers/errorMessages");

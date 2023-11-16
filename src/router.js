@@ -19,9 +19,9 @@ const {
 } = require("./middlewares/md_customers");
 const {
   loginFields,
-  editFields,
   auth,
   registerFields,
+  updateFields,
 } = require("./middlewares/md_users");
 const {
   deleteProductById,
@@ -33,7 +33,10 @@ const {
 const {
   productFields,
   validateProdutoId,
+  multer,
 } = require("./middlewares/md_products");
+const { registerOrder } = require("./controllers/orders");
+const { orderFields } = require("./middlewares/md_orders");
 const { listOrders } = require("./controllers/orders");
 
 const router = Router();
@@ -44,20 +47,32 @@ router.get("/categoria", listCategories);
 
 router.use(auth);
 
-router.put("/usuario", editFields, updateUser);
+router.put("/usuario", updateFields, updateUser);
 router.get("/usuario", userProfile);
 router.get("/categoria", listCategories);
 router.get("/cliente", getAllCustomers);
 router.get("/cliente/:id", getCustomerById);
 router.delete("/produto/:id", deleteProductById);
-router.post("/produto", productFields, registerProduct);
-router.put("/produto/:id", productFields, validateProdutoId, updateProduct);
+router.post(
+  "/produto",
+  multer.single("productImage"),
+  productFields,
+  registerProduct
+);
+router.put(
+  "/produto/:id",
+  multer.single("productImage"),
+  productFields,
+  validateProdutoId,
+  updateProduct
+);
 router.get("/produto", listProducts);
 router.get("/produto/:id", detailProducts);
 
 router.post("/cliente", customerRegisterFields, registerCustomer);
 router.put("/cliente/:id", customerUpdateFields, updateCustomer);
 
-router.get("/pedido", listOrders);
+router.post("/pedido", orderFields, registerOrder);
+router.get("/pedido/:id", listOrders);
 
 module.exports = router;

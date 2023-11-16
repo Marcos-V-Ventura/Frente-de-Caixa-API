@@ -1,18 +1,28 @@
 const yup = require("yup");
 const { pt } = require("yup-locales");
-const { typeErrorString, typeErrorNumber } = require("./errorMessages");
+const { typeErrorString } = require("./errorMessages");
 yup.setLocale(pt);
 
 const validateRegisterAndUpdateCustomer = yup.object({
-  nome: yup.string().required(),
-  email: yup.string().email().required(),
-  cpf: yup.string().length(11).required(),
-  cep: yup.string().length(8),
-  rua: yup.string(),
-  numero: yup.string(),
-  bairro: yup.string(),
-  cidade: yup.string(),
-  estado: yup.string(),
+  nome: yup.string().required().typeError(typeErrorString("Nome")).strict(),
+  email: yup
+    .string()
+    .email()
+    .typeError(typeErrorString("Email"))
+    .required()
+    .strict(),
+  cpf: yup
+    .string()
+    .length(11)
+    .typeError(typeErrorString("CPF"))
+    .required()
+    .strict(),
+  cep: yup.string().length(9).strict(),
+  rua: yup.string().strict(),
+  numero: yup.string().strict(),
+  bairro: yup.string().strict(),
+  cidade: yup.string().strict(),
+  estado: yup.string().strict(),
 });
 
 module.exports = validateRegisterAndUpdateCustomer;

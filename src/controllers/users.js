@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const knex = require("../connection");
+const { knex } = require("../connection");
 const jwt = require("jsonwebtoken");
 const errorMessages = require("../helpers/errorMessages");
 const utils = require("../helpers/utils");
