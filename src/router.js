@@ -16,6 +16,7 @@ const {
 const {
   customerUpdateFields,
   customerRegisterFields,
+  customerId,
 } = require("./middlewares/md_customers");
 const {
   loginFields,
@@ -51,7 +52,7 @@ router.put("/usuario", updateFields, updateUser);
 router.get("/usuario", userProfile);
 router.get("/categoria", listCategories);
 router.get("/cliente", getAllCustomers);
-router.get("/cliente/:id", getCustomerById);
+router.get("/cliente/:id", customerId, getCustomerById);
 router.delete("/produto/:id", deleteProductById);
 router.post(
   "/produto",

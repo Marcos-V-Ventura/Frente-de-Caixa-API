@@ -15,7 +15,10 @@ const listOrders = async (req, res) => {
         res.status(404).json({ messagem: errorMessages.orderNotfound });
       }
 
-      const listProductOrder = await knex("pedido_produtos").where("pedido_id", listOrder[0].id);
+      const listProductOrder = await knex("pedido_produtos").where(
+        "pedido_id",
+        listOrder[0].id
+      );
 
       const objectListOrder = {
         pedido: listOrder,
@@ -24,7 +27,6 @@ const listOrders = async (req, res) => {
 
       return res.status(200).json(objectListOrder);
     } else if (!cliente_id) {
-
       const listOrder = await knex("pedidos").returning("*");
       const listProductOrder = await knex("pedido_produtos").returning("*");
 
@@ -45,7 +47,7 @@ const listOrders = async (req, res) => {
 const registerOrder = async (req, res) => {
   const { cliente_id, pedido_produtos, observacao } = req.body;
   try {
-    const client = await utils.getClient(cliente_id);
+    const client = await utils.getCustomer(cliente_id);
     send(
       client.email,
       successMessages.subjectNewOrder,
