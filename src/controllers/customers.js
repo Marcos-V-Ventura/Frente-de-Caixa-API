@@ -5,51 +5,11 @@ const errorMessages = require("../helpers/errorMessages");
 const registerCustomer = async (req, res) => {
   const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } =
     req.body;
-
   try {
-    const table = "clientes";
-    let columnQuery = ["nome", "email", "cpf"];
-    let valuesQuery = [nome, email, cpf];
-
-    if (cep) {
-      const params = "cep";
-      columnQuery.push(params);
-      valuesQuery.push(cep);
-    }
-    if (rua) {
-      const params = "rua";
-      columnQuery.push(params);
-      valuesQuery.push(rua);
-    }
-    if (numero) {
-      const params = "numero";
-      columnQuery.push(params);
-      valuesQuery.push(numero);
-    }
-    if (bairro) {
-      const params = "bairro";
-      columnQuery.push(params);
-      valuesQuery.push(bairro);
-    }
-    if (cidade) {
-      const params = "cidade";
-      columnQuery.push(params);
-      valuesQuery.push(cidade);
-    }
-    if (estado) {
-      const params = "estado";
-      columnQuery.push(params);
-      valuesQuery.push(estado);
-    }
-    let placeholdersColumns = columnQuery.map(() => "??").join(", ");
-    let placeholdersValues = valuesQuery.map(() => "?").join(", ");
-
-    const registerCustomer = await knex.raw(
-      `INSERT INTO ?? (${placeholdersColumns}) VALUES (${placeholdersValues})`,
-      [table, ...columnQuery, ...valuesQuery]
-    );
-
-    if (!registerCustomer.rowCount) {
+    const registerCustomer = await knex("clientes")
+      .insert({ nome, email, cpf, cep, rua, numero, bairro, cidade, estado })
+      .returning("*");
+    if (!registerCustomer) {
       return res
         .status(400)
         .json({ mensagem: errorMessages.customerWasNotRegistered });
@@ -64,11 +24,12 @@ const registerCustomer = async (req, res) => {
 };
 
 const updateCustomer = async (req, res) => {
-  const { nome, email, cpf } = req.body;
+  const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } =
+    req.body;
   const { id } = req.params;
   try {
     await knex("clientes")
-      .update({ nome, email, cpf })
+      .update({ nome, email, cpf, cep, rua, numero, bairro, cidade, estado })
       .where({ id })
       .returning("*");
 
