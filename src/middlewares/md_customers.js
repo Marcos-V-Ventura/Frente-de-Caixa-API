@@ -16,9 +16,7 @@ const customerRegisterFields = async (req, res, next) => {
             .orWhere({ email })
             .first();
         if (find) {
-            return res
-                .status(409)
-                .json({ mensagem: errorMessages.invalidEmailOrCpf });
+            return res.status(409).json({ mensagem: errorMessages.invalidEmailOrCpf });
         }
 
         next();
@@ -31,7 +29,7 @@ const customerRegisterFields = async (req, res, next) => {
 };
 
 const customerUpdateFields = async (req, res, next) => {
-    const { nome, email, cpf } = req.body;
+    const { email, cpf } = req.body;
     const { id } = req.params;
 
     try {
@@ -40,7 +38,7 @@ const customerUpdateFields = async (req, res, next) => {
         const findId = await knex("clientes").where({ id }).returning("*");
 
         if (!findId.length) {
-            return res.status(400).json({ mensagem: errorMessages.customerNotFound });
+            return res.status(400).json({ mensagem: errorMessages.customerNotFound(id) });
         }
 
         if (email) {

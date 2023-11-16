@@ -1,6 +1,7 @@
 const yup = require("yup");
 const { pt } = require("yup-locales");
 const { typeErrorString, typeErrorNumber, typeErrorArray } = require("./errorMessages");
+const yupMessages = require("./yupMessages");
 yup.setLocale(pt);
 
 const validateAllFieldsOrders = yup.object({
@@ -19,17 +20,17 @@ const validateAllFieldsOrders = yup.object({
             yup.object({
                 produto_id: yup
                     .number()
-                    .required()
+                    .required(yupMessages.requiredProductId)
                     .typeError(typeErrorNumber("Produto_id"))
                     .strict(),
                 quantidade_produto: yup
                     .number()
-                    .required()
+                    .required(yupMessages.requiredQuantityProduct)
                     .typeError(typeErrorNumber("Quantidade_produto"))
                     .strict()
             })
         )
-        .min(2, "Pedido_produtos: Os campos produto_id e quantidade_produto são obrigatórios")
+        .min(1, yupMessages.minOrderProduct)
         .required()
         .typeError(typeErrorArray("Pedido_produtos"))
         .strict(),

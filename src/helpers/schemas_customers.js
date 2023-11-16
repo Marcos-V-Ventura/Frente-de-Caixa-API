@@ -4,7 +4,11 @@ const { typeErrorString } = require("./errorMessages");
 yup.setLocale(pt);
 
 const validateRegisterAndUpdateCustomer = yup.object({
-  nome: yup.string().required().typeError(typeErrorString("Nome")).strict(),
+  nome: yup
+    .string()
+    .required()
+    .typeError(typeErrorString("Nome"))
+    .strict(),
   email: yup
     .string()
     .email()

@@ -21,13 +21,15 @@ const productFields = async (req, res, next) => {
 
         const category = await utils.getCategory(categoria_id);
 
-        if (!category)
+        if (!category) {
             return res.status(401).json({ mensagem: errorMessages.invalidCategoria });
+        }
 
         next();
     } catch (error) {
-        if (error.name == "ValidationError")
+        if (error.name == "ValidationError") {
             return res.status(400).json({ mensagem: error.message });
+        }
 
         return res
             .status(500)
@@ -39,8 +41,9 @@ const validateProdutoId = async (req, res, next) => {
     const { id } = req.params;
     try {
         const productFound = await utils.getProduct(id);
-        if (!productFound)
-            return res.status(404).json({ mensagem: errorMessages.invalidProducts });
+        if (!productFound) {
+            return res.status(404).json({ mensagem: errorMessages.productNotFound(id) });
+        }
 
         next();
     } catch (error) {

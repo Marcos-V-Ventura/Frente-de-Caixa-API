@@ -1,4 +1,4 @@
-const knex = require("../connection");
+const { knex } = require("../connection");
 const errorMessages = require("../helpers/errorMessages");
 const validateAllFieldsOrders = require("../helpers/schemas_orders");
 const successMessages = require("../helpers/successMessages");
@@ -16,7 +16,7 @@ const registerOrder = async (req, res) => {
         const totalValue = await utils.getOrderTotalValue(pedido_produtos);
         const [orderFull] = await knex('pedidos').insert({ cliente_id, observacao, valor_total: totalValue }).returning('*');
 
-        await utils.insertPedidoProduto(pedido_produtos, orderFull.id);
+        await utils.insertOrderProduct(pedido_produtos, orderFull.id);
 
         return res.status(201).json();
     } catch (error) {

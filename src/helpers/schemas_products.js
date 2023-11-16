@@ -1,6 +1,7 @@
 const yup = require("yup");
 const { pt } = require("yup-locales");
 const { typeErrorString, typeErrorNumber } = require("./errorMessages");
+const yupMessages = require("./yupMessages");
 yup.setLocale(pt);
 
 const validateAllFieldsProduct = yup.object({
@@ -11,12 +12,13 @@ const validateAllFieldsProduct = yup.object({
         .strict(),
     quantidade_estoque: yup
         .number()
+        .min(1, yupMessages.minQuantityStock)
         .required()
         .typeError(typeErrorNumber("Quantidade_estoque"))
         .strict(),
     valor: yup
         .number()
-        .min(1, "O valor não pode ser negativo ou zero!")
+        .min(1, yupMessages.minValueProduct)
         .required()
         .typeError(typeErrorNumber("Valor"))
         .strict(),

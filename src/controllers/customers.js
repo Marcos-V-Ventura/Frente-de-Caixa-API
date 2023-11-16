@@ -3,29 +3,24 @@ const errorMessages = require("../helpers/errorMessages");
 const utils = require("../helpers/utils");
 
 const registerCustomer = async (req, res) => {
-  const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } =
-    req.body;
+  const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } = req.body;
   try {
     const registerCustomer = await knex("clientes")
       .insert({ nome, email, cpf, cep, rua, numero, bairro, cidade, estado })
       .returning("*");
+
     if (!registerCustomer) {
-      return res
-        .status(400)
-        .json({ mensagem: errorMessages.customerWasNotRegistered });
+      return res.status(400).json({ mensagem: errorMessages.customerWasNotRegistered });
     }
 
     return res.status(201).json();
   } catch ({ message }) {
-    return res
-      .status(500)
-      .json({ mensagem: errorMessages.server, error: message });
+    return res.status(500).json({ mensagem: errorMessages.server, error: message });
   }
 };
 
 const updateCustomer = async (req, res) => {
-  const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } =
-    req.body;
+  const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } = req.body;
   const { id } = req.params;
   try {
     await knex("clientes")
@@ -59,8 +54,9 @@ const getCustomerById = async (req, res) => {
   try {
     const client = await utils.getClient(id);
 
-    if (!client)
-      return res.status(404).json({ mensagem: errorMessages.clientNotFound });
+    if (!client) {
+      return res.status(404).json({ mensagem: errorMessages.customerNotFound(id) });
+    }
 
     return res.status(200).json(client);
   } catch ({ message }) {
