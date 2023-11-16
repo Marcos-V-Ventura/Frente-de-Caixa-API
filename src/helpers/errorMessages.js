@@ -9,6 +9,7 @@ const errorMessages = {
   duplicateCPF: "O CPF informado já está sendo utilizado por outro usuário",
   server: "Erro interno do servidor.",
   customerWasNotRegistered: "Cliente não foi cadastrado.",
+  clientIdMusteBeNumber: "O valor precisa ser um número",
   customerNotFound: (id) => `Cliente com ID ${id} não foi encontrado`,
   productNotFound: (id) => `Produto com ID ${id} não foi encontrado.`,
   typeErrorString: (name) => `${name} deve ser uma string.`,
