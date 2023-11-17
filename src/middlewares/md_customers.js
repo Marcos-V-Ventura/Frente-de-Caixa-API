@@ -51,7 +51,8 @@ const customerUpdateFields = async (req, res, next) => {
       const findDuplicateEmail = await knex("clientes")
         .where({ email })
         .whereNot({ id })
-        .select("*");
+        .select("*")
+        .first();
       if (findDuplicateEmail) {
         return res.status(409).json({ mensagem: errorMessages.duplicateEmail });
       }
@@ -60,8 +61,9 @@ const customerUpdateFields = async (req, res, next) => {
       const findDuplicateCPF = await knex("clientes")
         .where({ cpf })
         .whereNot({ id })
-        .select("*");
-      if (findDuplicateCPF.length) {
+        .select("*")
+        .first();
+      if (findDuplicateCPF) {
         return res.status(409).json({ mensagem: errorMessages.duplicateCPF });
       }
     }
