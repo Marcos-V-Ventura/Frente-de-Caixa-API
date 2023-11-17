@@ -56,13 +56,13 @@ router.get("/cliente/:id", customerId, getCustomerById);
 router.delete("/produto/:id", deleteProductById);
 router.post(
   "/produto",
-  multer.single("productImage"),
+  multer.single("produto_imagem"),
   productFields,
   registerProduct
 );
 router.put(
   "/produto/:id",
-  multer.single("productImage"),
+  multer.single("produto_imagem"),
   productFields,
   validateProdutoId,
   updateProduct
