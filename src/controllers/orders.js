@@ -12,7 +12,7 @@ const listOrders = async (req, res) => {
       const listOrder = await knex("pedidos").where({ cliente_id }).first();
 
       if (!listOrder) {
-        res.status(404).json({ messagem: errorMessages.orderNotfound });
+        return res.status(404).json({ messagem: errorMessages.orderNotfound });
       }
 
       const listProductOrder = await knex("pedido_produtos").where(
