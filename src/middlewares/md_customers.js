@@ -41,7 +41,7 @@ const customerUpdateFields = async (req, res, next) => {
 
     const findId = await utils.getCustomer(id);
 
-    if (!findId.length) {
+    if (!findId) {
       return res
         .status(400)
         .json({ mensagem: errorMessages.customerNotFound(id) });
@@ -52,7 +52,7 @@ const customerUpdateFields = async (req, res, next) => {
         .where({ email })
         .whereNot({ id })
         .select("*");
-      if (findDuplicateEmail.length) {
+      if (findDuplicateEmail) {
         return res.status(409).json({ mensagem: errorMessages.duplicateEmail });
       }
     }
