@@ -1,6 +1,10 @@
 const yup = require("yup");
 const { pt } = require("yup-locales");
-const { typeErrorString, typeErrorNumber, typeErrorArray } = require("./errorMessages");
+const {
+  typeErrorString,
+  typeErrorNumber,
+  typeErrorArray,
+} = require("./errorMessages");
 const yupMessages = require("./yupMessages");
 yup.setLocale(pt);
 
@@ -10,10 +14,7 @@ const validateAllFieldsOrders = yup.object({
     .required()
     .typeError(typeErrorNumber("Cliente_id"))
     .strict(),
-  observacao: yup
-    .string()
-    .typeError(typeErrorString("Observacao"))
-    .strict(),
+  observacao: yup.string().typeError(typeErrorString("Observacao")).strict(),
   pedido_produtos: yup
     .array()
     .of(
@@ -31,8 +32,9 @@ const validateAllFieldsOrders = yup.object({
       })
     )
     .min(1, yupMessages.minOrderProduct)
+    .required()
     .typeError(typeErrorArray("Pedido_produtos"))
-    .strict()
-})
+    .strict(),
+});
 
 module.exports = { validateAllFieldsOrders };
