@@ -1,7 +1,7 @@
 const errorMessages = {
   invalidCategoria: "Categoria não encontrada.",
-  invalidEmailOrSenha: "Email e/ou senha inválido(s)",
-  invalidEmailOrCpf: "Email e/ou CPF inválido(s)",
+  invalidEmailOrSenha: "Email e/ou senha inválido(s).",
+  invalidEmailOrCpf: "Email e/ou CPF inválido(s).",
   invalidToken:
     "Para acessar este recurso um token de autenticação válido deve ser enviado",
   duplicateEmail:
