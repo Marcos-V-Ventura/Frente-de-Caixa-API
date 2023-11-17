@@ -9,15 +9,15 @@ const listOrders = async (req, res) => {
 
   try {
     if (cliente_id) {
-      const listOrder = await knex("pedidos").where({ cliente_id });
+      const listOrder = await knex("pedidos").where({ cliente_id }).first();
 
-      if (!listOrder.length) {
+      if (!listOrder) {
         res.status(404).json({ messagem: errorMessages.orderNotfound });
       }
 
       const listProductOrder = await knex("pedido_produtos").where(
         "pedido_id",
-        listOrder[0].id
+        listOrder.id
       );
 
       const objectListOrder = {
