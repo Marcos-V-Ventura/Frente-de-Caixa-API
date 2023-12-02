@@ -31,7 +31,7 @@
                 "nome": "Novo Usuario",
                 "email": "novoUsario@gmail.com",
                 "senha": "senhaSegura"
-              }
+              } 
             }
           }
         },
@@ -356,8 +356,8 @@
           }
         },
         "responses": {
-          "204": {
-            "description": "No Content",
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -457,7 +457,7 @@
         },
         "responses": {
           "201": {
-            "description": "OK",
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -702,7 +702,7 @@
                 "example": {
                   "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
                 }
-              }
+              }}
             },
             "400": {
               "description": "Bad Request",
@@ -815,8 +815,8 @@
                   }
                 }
               }
-            }
-          }
+            
+          }}
         },
         "get": {
           "summary": "Listar Cliente pelo ID",
@@ -903,8 +903,7 @@
             }
           ]
         }
-      }
-    },
+      },
     "/produto": {
       "post": {
         "summary": "Criação de um novo produto",
@@ -1070,7 +1069,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
-                "examples": {
+                "example": {
                   "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
                 }
               }
@@ -1252,7 +1251,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/Produto"
                 },
-                "examples": {
+                "example": {
                   "id": 1,
                   "descricao": "Descricao qualquer",
                   "quantidade_estoque": 10,
@@ -1283,7 +1282,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
-                "examples": {
+                "example": {
                   "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
                 }
               }
@@ -1327,7 +1326,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "204": {
             "description": "Not Content"
           },
           "400": {
