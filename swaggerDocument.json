@@ -1,0 +1,1988 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Projeto Final Cubos",
+    "description": "API para um PDV (Frente de Caixa).",
+    "contact": {
+      "url": "https://github.com/vitorhvieira"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://calm-teal-lamb-gown.cyclic.app",
+      "description": "Servidor para testes localmente."
+    }
+  ],
+  "paths": {
+    "/usuario": {
+      "post": {
+        "summary": "Cadastrar usuário",
+        "tags": ["Usuario"],
+        "description": "Cadastra um novo usuário no sistema.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioEntrada"
+              },
+              "example": {
+                "nome": "Novo Usuario",
+                "email": "novoUsario@gmail.com",
+                "senha": "senhaSegura"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Nome": {
+                    "value": {
+                      "mensagem": "Nome é um campo necessário"
+                    }
+                  },
+                  "Email": {
+                    "value": {
+                      "mensagem": "Email é um campo necessário"
+                    }
+                  },
+                  "Senha": {
+                    "value": {
+                      "mensagem": "Senha é um campo necessário"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "O e-mail informado já está sendo utilizado por outro usuário."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Detalhar usuário",
+        "tags": ["Usuario"],
+        "description": "Detalha o usuário através do Token gerado no login.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/usuarioSaida"
+                },
+                "example": {
+                  "id": 1,
+                  "nome": "Novo Usuario",
+                  "email": "novoUsario@gmail.com"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar usuário",
+        "tags": ["Usuario"],
+        "description": "Atualiza o usuário através do Token gerado no login",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioEntrada"
+              },
+              "example": {
+                "nome": "Novo Usuario Atualizado",
+                "email": "novoUsarioAtualizado@gmail.com",
+                "senha": "senhaSegura"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Nome": {
+                    "value": {
+                      "mensagem": "Nome é um campo necessário"
+                    }
+                  },
+                  "Email": {
+                    "value": {
+                      "mensagem": "Email é um campo necessário"
+                    }
+                  },
+                  "Senha": {
+                    "value": {
+                      "mensagem": "Senha é um campo necessário"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "O e-mail informado já está sendo utilizado por outro usuário"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categoria": {
+      "get": {
+        "summary": "Listagem das categorias cadastradas",
+        "description": "Essa rota é responsável pela listagem das categorias cadastradas no banco de dados.",
+        "tags": ["Categoria"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Categoria"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "descricao": "Informática"
+                  },
+                  {
+                    "id": 2,
+                    "descricao": "Celulares"
+                  },
+                  {
+                    "id": 3,
+                    "descricao": "Chevrolet"
+                  },
+                  {
+                    "id": 4,
+                    "descricao": "Beleza e Perfumaria"
+                  },
+                  {
+                    "id": 5,
+                    "descricao": "Mercado"
+                  },
+                  {
+                    "id": 6,
+                    "descricao": "Livros e Papelaria"
+                  },
+                  {
+                    "id": 7,
+                    "descricao": "Brinquedos"
+                  },
+                  {
+                    "id": 8,
+                    "descricao": "Moda"
+                  },
+                  {
+                    "id": 9,
+                    "descricao": "Bebê"
+                  },
+                  {
+                    "id": 10,
+                    "descricao": "Games"
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Fazer login",
+        "tags": ["Login"],
+        "description": "Realizar o login e gera um token de autenticação.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioLogin"
+              },
+              "example": {
+                "email": "novoUsario@gmail.com",
+                "senha": "senhaSegura"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/usuarioToken"
+                },
+                "example": {
+                  "usuario": {
+                    "id": 1,
+                    "nome": "Novo Usuario",
+                    "email": "novoUsario@gmail.com"
+                  },
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzAwNjczNzI2LCJleHAiOjE3MDA3MDI1MjZ9.ZTpfNDF5ooH1V86eoVd2EWIOw71qyaG4cFB_BUnID0U"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Email": {
+                    "value": {
+                      "mensagem": "Email é um campo necessário"
+                    }
+                  },
+                  "Senha": {
+                    "value": {
+                      "mensagem": "Senha é um campo necessário"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Email e/ou senha inválido(s)."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cliente": {
+      "post": {
+        "summary": "Cadastrar Cliente",
+        "tags": ["Cliente"],
+        "description": "Cadastra um novo cliente no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              },
+              "example": {
+                "nome": "Novo Cliente",
+                "email": "novoCliente@gmail.com",
+                "cpf": "12345678901",
+                "cep": "12345678901",
+                "rua": "Rua Exemplo",
+                "numero": "111",
+                "bairro": "Bairro de Exemplo",
+                "cidade": "Cidade de Exemplo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Cliente cadastrado com sucesso."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Nome_campo": {
+                    "value": {
+                      "mensagem": "Nome é um campo necessário"
+                    }
+                  },
+                  "Email_campo": {
+                    "value": {
+                      "mensagem": "Email é um campo necessário"
+                    }
+                  },
+                  "Senha_campo": {
+                    "value": {
+                      "mensagem": "Senha é um campo necessário"
+                    }
+                  },
+                  "Nome_tipo": {
+                    "value": {
+                      "mensagem": "Nome deve ser uma string"
+                    }
+                  },
+                  "Email_tipo": {
+                    "value": {
+                      "mensagem": "Email deve ser uma string"
+                    }
+                  },
+                  "Senha_tipo": {
+                    "value": {
+                      "mensagem": "Senha deve ser uma string"
+                    }
+                  },
+                  "Cep_tipo": {
+                    "value": {
+                      "mensagem": "Cep deve ser uma string"
+                    }
+                  },
+                  "Rua_tipo": {
+                    "value": {
+                      "mensagem": "Rua deve ser uma string"
+                    }
+                  },
+                  "Numero_tipo": {
+                    "value": {
+                      "mensagem": "Numero deve ser uma string"
+                    }
+                  },
+                  "Bairro_tipo": {
+                    "value": {
+                      "mensagem": "Bairro deve ser uma string"
+                    }
+                  },
+                  "Cidade_tipo": {
+                    "value": {
+                      "mensagem": "Cidade deve ser uma string"
+                    }
+                  },
+                  "Estado_tipo": {
+                    "value": {
+                      "mensagem": "Estado deve ser uma string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Email e/ou CPF inválido(s)."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar Clientes",
+        "tags": ["Cliente"],
+        "description": "Lista todos os clientes cadastrados no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/cliente"
+                  }
+                },
+                "example": {
+                  "nome": "Novo Cliente",
+                  "email": "novoCliente@gmail.com",
+                  "cpf": "12345678901",
+                  "cep": "12345678901",
+                  "rua": "Rua Exemplo",
+                  "numero": "111",
+                  "bairro": "Bairro de Exemplo",
+                  "cidade": "Cidade de Exemplo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cliente/{id}": {
+      "put": {
+        "summary": "Atualizar Cliente",
+        "tags": ["Cliente"],
+        "description": "Atualiza o cliente no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Id do cliente que deseja atualizar."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/cliente"
+              },
+              "example": {
+                "nome": "Novo Cliente Atualizado",
+                "email": "novoClienteAtualizado@gmail.com",
+                "cpf": "12345678111",
+                "cep": "12345678111",
+                "rua": "Rua Exemplo Atualizado",
+                "numero": "22",
+                "bairro": "Bairro de Exemplo Atualizado",
+                "cidade": "Cidade de Exemplo Atualizado"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "examples": {
+                    "Nome_campo": {
+                      "value": {
+                        "mensagem": "Nome é um campo necessário"
+                      }
+                    },
+                    "Email_campo": {
+                      "value": {
+                        "mensagem": "Email é um campo necessário"
+                      }
+                    },
+                    "Senha_campo": {
+                      "value": {
+                        "mensagem": "Senha é um campo necessário"
+                      }
+                    },
+                    "Nome_tipo": {
+                      "value": {
+                        "mensagem": "Nome deve ser uma string"
+                      }
+                    },
+                    "Email_tipo": {
+                      "value": {
+                        "mensagem": "Email deve ser uma string"
+                      }
+                    },
+                    "Senha_tipo": {
+                      "value": {
+                        "mensagem": "Senha deve ser uma string"
+                      }
+                    },
+                    "Cep_tipo": {
+                      "value": {
+                        "mensagem": "Cep deve ser uma string"
+                      }
+                    },
+                    "Rua_tipo": {
+                      "value": {
+                        "mensagem": "Rua deve ser uma string"
+                      }
+                    },
+                    "Numero_tipo": {
+                      "value": {
+                        "mensagem": "Numero deve ser uma string"
+                      }
+                    },
+                    "Bairro_tipo": {
+                      "value": {
+                        "mensagem": "Bairro deve ser uma string"
+                      }
+                    },
+                    "Idade_tipo": {
+                      "value": {
+                        "mensagem": "Cidade deve ser uma string"
+                      }
+                    },
+                    "Estado_tipo": {
+                      "value": {
+                        "mensagem": "Estado deve ser uma string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "mensagem": "Cliente com ID 99 não foi encontrado"
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "Conflict",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "mensagem": "Email e/ou CPF inválido(s)."
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "mensagem": "Erro interno do servidor.",
+                    "error": "jwt malformed"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "summary": "Listar Cliente pelo ID",
+          "tags": ["Cliente"],
+          "description": "Lista o cliente com ID informado.",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Cliente listado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/cliente"
+                  },
+                  "example": {
+                    "id": "1",
+                    "nome": "Novo Cliente Atualizado",
+                    "email": "novoClienteAtualizado@gmail.com",
+                    "cpf": "12345678111",
+                    "cep": "12345678111",
+                    "rua": "Rua Exemplo Atualizado",
+                    "numero": "22",
+                    "bairro": "Bairro de Exemplo Atualizado",
+                    "cidade": "Cidade de Exemplo Atualizado"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/Json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "mensagem": "Cliente com ID 99 não foi encontrado"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  },
+                  "example": {
+                    "mensagem": "Erro interno do servidor.",
+                    "error": "jwt malformed"
+                  }
+                }
+              }
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "description": "Id do cliente que deseja listar."
+            }
+          ]
+        }
+      }
+    },
+    "/produto": {
+      "post": {
+        "summary": "Criação de um novo produto",
+        "description": "Endpoint para criar um novo produto.",
+        "tags": ["Produto"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "descricao",
+                  "quantidade_estoque",
+                  "valor",
+                  "categoria_id"
+                ],
+                "properties": {
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "quantidade_estoque": {
+                    "type": "number"
+                  },
+                  "valor": {
+                    "type": "number"
+                  },
+                  "categoria_id": {
+                    "type": "number"
+                  },
+                  "produto_imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Descricao": {
+                    "value": {
+                      "mensagem": "Descricao é um campo necessário!"
+                    }
+                  },
+                  "Quantidade_estoque": {
+                    "value": {
+                      "mensagem": "Quantidade_estoque é um campo necessário!"
+                    }
+                  },
+                  "Valor": {
+                    "value": {
+                      "mensagem": "Valor é um campo necessário!"
+                    }
+                  },
+                  "Categoria_id ": {
+                    "value": {
+                      "mensagem": "Categoria_id é um campo necessário!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar Produto",
+        "description": "Endpoint para listar todos os produtos cadastrados!",
+        "tags": ["Produto"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Produto"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "descricao": "Descricao qualquer",
+                    "quantidade_estoque": 10,
+                    "valor": 10,
+                    "categoria_id": 1,
+                    "produto_imagem": null
+                  },
+                  {
+                    "id": 2,
+                    "descricao": "Descricao qualquer de um segundo produto",
+                    "quantidade_estoque": 100,
+                    "valor": 100,
+                    "categoria_id": 2,
+                    "produto_imagem": "https://sitequalquerqueestaaimagem.com/imagemqualquer.jpg"
+                  },
+                  {
+                    "id": 3,
+                    "descricao": "Descricao qualquer de um terceiro produto",
+                    "quantidade_estoque": 20,
+                    "valor": 500,
+                    "categoria_id": 5,
+                    "produto_imagem": null
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produto/{id}": {
+      "put": {
+        "summary": "Editar um produto",
+        "description": "Endpoint para editar um produto.",
+        "tags": ["Produto"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "ID do produto"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "descricao",
+                  "quantidade_estoque",
+                  "valor",
+                  "categoria_id"
+                ],
+                "properties": {
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "quantidade_estoque": {
+                    "type": "number"
+                  },
+                  "valor": {
+                    "type": "number"
+                  },
+                  "categoria_id": {
+                    "type": "number"
+                  },
+                  "produto_imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Descricao": {
+                    "value": {
+                      "mensagem": "Descricao é um campo necessário!"
+                    }
+                  },
+                  "Quantidade_estoque": {
+                    "value": {
+                      "mensagem": "Quantidade_estoque é um campo necessário!"
+                    }
+                  },
+                  "Valor": {
+                    "value": {
+                      "mensagem": "Valor é um campo necessário!"
+                    }
+                  },
+                  "Categoria_id ": {
+                    "value": {
+                      "mensagem": "Categoria_id é um campo necessário!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Categoria": {
+                    "value": {
+                      "mensagem": "Categoria é um campo necessário!"
+                    }
+                  },
+                  "Token": {
+                    "value": {
+                      "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Detalhar produto pelo ID",
+        "description": "Endpoint para detalhar o produto pelo ID.",
+        "tags": ["Produto"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "ID do produto"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Produto"
+                },
+                "examples": {
+                  "id": 1,
+                  "descricao": "Descricao qualquer",
+                  "quantidade_estoque": 10,
+                  "valor": 10,
+                  "categoria_id": 1,
+                  "produto_imagem": null
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Produto com ID não foi encontrado!"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar produto pelo ID",
+        "description": "Endpoint para deletar o produto pelo ID.",
+        "tags": ["Produto"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "ID do produto"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Not Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Produto com ID não foi encontrado!"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "O produto ao qual deseja deletar esta vinculado ao pedido_produtos com ID !"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pedido": {
+      "post": {
+        "summary": "Cadastrar pedido",
+        "tags": ["Pedido"],
+        "description": "Cadastra um novo pedido no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pedidoEntrada"
+              },
+              "example": {
+                "cliente_id": 1,
+                "observacao": "Observação relevante que o cliente deseja colocar.",
+                "pedido_produtos": [
+                  {
+                    "pedido_id": 1,
+                    "quantidade_produto": 2
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "cliente_id_campo": {
+                    "value": {
+                      "mensagem": "cliente_id é um campo necessário"
+                    }
+                  },
+                  "pedido_produto_campo": {
+                    "value": {
+                      "mensagem": "pedido_produto é um campo necessário"
+                    }
+                  },
+                  "produto_id_campo": {
+                    "value": {
+                      "mensagem": "pedido_produto é um campo necessário"
+                    }
+                  },
+                  "quantidade_produto_campo": {
+                    "value": {
+                      "mensagem": "pedido_produto é um campo necessário"
+                    }
+                  },
+                  "cliente_id_tipo": {
+                    "value": {
+                      "mensagem": "cliente_id deve ser um número"
+                    }
+                  },
+                  "pedido_produto_tipo": {
+                    "value": {
+                      "mensagem": "pedido_produto deve ser um número"
+                    }
+                  },
+                  "produto_id_tipo": {
+                    "value": {
+                      "mensagem": "pedido_produto deve ser um número"
+                    }
+                  },
+                  "quantidade_produto_tipo": {
+                    "value": {
+                      "mensagem": "pedido_produto deve ser um número"
+                    }
+                  },
+                  "observacao_tipo": {
+                    "value": {
+                      "mensagem": "observacao deve ser uma string"
+                    }
+                  },
+                  "quantidade_produto_quantidade": {
+                    "value": {
+                      "mensagem": "Quantidade informada (-1) para o produto de ID 2 deve ser MAIOR ou IGUAL a 1."
+                    }
+                  },
+                  "pedido_produto_arrayVazio": {
+                    "value": {
+                      "mensagem": "Pedido_produtos: Os campos produto_id e quantidade_produto são necessários."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Categoria": {
+                    "value": {
+                      "mensagem": "Categoria é um campo necessário!"
+                    }
+                  },
+                  "Token": {
+                    "value": {
+                      "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "cliente_id": {
+                    "value": {
+                      "mensagem": "Cliente com ID 99 não foi encontrado"
+                    }
+                  },
+                  "produto_id": {
+                    "value": {
+                      "mensagem": "Produto com ID 99 não foi encontrado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar pedidos",
+        "description": "Endpoint para listar todos os pedidos cadastrados.",
+        "tags": ["Pedido"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pedido": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Pedido"
+                      }
+                    },
+                    "pedido_produtos": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Pedido_produtos"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "pedido": [
+                    {
+                      "cliente_id": 1,
+                      "observacao": "Em caso de ausência, recomendo deixar com algum vizinho",
+                      "valor_total": 50
+                    },
+                    {
+                      "id": 2,
+                      "cliente_id": 2,
+                      "observacao": "Casa com muro amarelo",
+                      "valor_total": 10
+                    }
+                  ],
+                  "pedido_produtos": [
+                    {
+                      "id": 1,
+                      "pedido_id": 1,
+                      "produto_id": 4,
+                      "quantidade_produto": 10,
+                      "valor_produto": 5
+                    },
+                    {
+                      "id": 2,
+                      "pedido_id": 2,
+                      "produto_id": 4,
+                      "quantidade_produto": 1,
+                      "valor_produto": 5
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Categoria": {
+                    "value": {
+                      "mensagem": "Categoria é um campo necessário!"
+                    }
+                  },
+                  "Token": {
+                    "value": {
+                      "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pedido?cliente_id={id}": {
+      "get": {
+        "summary": "Listar pedidos detalhado de um cliente",
+        "description": "Endpoint para detalhar todos os pedidos cadastrados de acordo com o ID.",
+        "tags": ["Pedido"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cliente_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "ID do cliente que cadastrou o pedido"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pedido": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Pedido"
+                      }
+                    },
+                    "pedido_produtos": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Pedido_produtos"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "pedido": [
+                    {
+                      "id": 1,
+                      "cliente_id": 1,
+                      "observacao": "Em caso de ausência, recomendo deixar com algum vizinho",
+                      "valor_total": 50
+                    }
+                  ],
+                  "pedido_produtos": [
+                    {
+                      "id": 1,
+                      "pedido_id": 1,
+                      "produto_id": 4,
+                      "quantidade_produto": 10,
+                      "valor_produto": 5
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "messagem": "Pedido(s) não encontrado(s)"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "usuarioEntrada": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          }
+        },
+        "required": ["nome", "email", "senha"]
+      },
+      "usuarioSaida": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "usuarioLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          }
+        },
+        "required": ["email", "senha"]
+      },
+      "usuarioToken": {
+        "type": "object",
+        "properties": {
+          "usuario": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "cliente": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "cep": {
+            "type": "string"
+          },
+          "rua": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "bairro": {
+            "type": "string"
+          },
+          "cidade": {
+            "type": "string"
+          }
+        },
+        "required": ["nome", "email", "cpf"]
+      },
+      "pedidoEntrada": {
+        "type": "object",
+        "properties": {
+          "cliente_id": {
+            "type": "integer"
+          },
+          "observacao": {
+            "type": "string"
+          },
+          "pedido_produtos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "produto_id": {
+                  "type": "integer"
+                },
+                "quantidade_produto": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "cliente_id",
+          "pedido_produtos",
+          "produto_id",
+          "quantidade_produto"
+        ]
+      },
+      "Categoria": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "descricao": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Produto": {
+        "type": "object",
+        "properties": {
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "descricao": {
+              "type": "string"
+            },
+            "quantidade_estoque": {
+              "type": "number"
+            },
+            "valor": {
+              "type": "number"
+            },
+            "categoria_id": {
+              "type": "number"
+            },
+            "produto_imagem": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "Pedido": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "cliente_id": {
+            "type": "number"
+          },
+          "observacao": {
+            "type": "string"
+          },
+          "valor_total": {
+            "type": "number"
+          }
+        }
+      },
+      "Pedido_produtos": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "pedido_id": {
+            "type": "number"
+          },
+          "produto_id": {
+            "type": "number"
+          },
+          "quantidade_produto": {
+            "type": "number"
+          },
+          "valor_produto": {
+            "type": "number"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["message"],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+  }
+}

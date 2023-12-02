@@ -21,12 +21,12 @@ const validateRegisterAndUpdateCustomer = yup.object({
     .typeError(typeErrorString("CPF"))
     .required()
     .strict(),
-  cep: yup.string().typeError(typeErrorString("Cep")).length(9).strict(),
-  rua: yup.string().typeError(typeErrorString("Rua")).strict(),
-  numero: yup.string().typeError(typeErrorString("Numero")).strict(),
-  bairro: yup.string().typeError(typeErrorString("Bairro")).strict(),
-  cidade: yup.string().typeError(typeErrorString("Cidade")).strict(),
-  estado: yup.string().typeError(typeErrorString("Estado")).strict(),
+  cep: yup.string().length(9).strict(),
+  rua: yup.string().strict(),
+  numero: yup.string().strict(),
+  bairro: yup.string().strict(),
+  cidade: yup.string().strict(),
+  estado: yup.string().strict(),
 });
 
 module.exports = validateRegisterAndUpdateCustomer;

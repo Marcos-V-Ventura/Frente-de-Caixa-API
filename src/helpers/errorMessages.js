@@ -22,6 +22,7 @@ const errorMessages = {
     `Quantidade informada (${quantidade}) para o produto de ID ${id} está indisponível`,
   linkedProduct: (findProductOrder) =>
     `O produto ao qual deseja deletar esta vinculado ao pedido_produtos com ID ${findProductOrder}!`,
+  requiredField: (field) => `${field} é um campo necessário!`,
 };
 
 module.exports = errorMessages;

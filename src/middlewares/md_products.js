@@ -8,15 +8,15 @@ const { validateId } = require("../helpers/schemas_id");
 yup.setLocale(pt);
 
 const productFields = async (req, res, next) => {
-  const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
+  let { descricao, quantidade_estoque, valor, categoria_id } = req.body;
   const { file } = req;
 
   try {
     await validateAllFieldsProduct.validate({
       descricao,
-      quantidade_estoque: Number(quantidade_estoque),
-      valor: Number(valor),
-      categoria_id: Number(categoria_id),
+      quantidade_estoque: quantidade_estoque,
+      valor,
+      categoria_id,
       produto_imagem: file,
     });
 
