@@ -58,7 +58,8 @@ $ npm run dev
 
 # O servidor inciará na porta:3000
 
-# Acesse o Swagger (Documentação da API) em http://localhost:3000
+# Acesse o Swagger (Documentação da API) em
+GET http://localhost:3000
 ```
 
 ## 🛣️ Endpoints
