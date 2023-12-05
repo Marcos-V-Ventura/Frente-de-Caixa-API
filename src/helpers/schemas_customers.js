@@ -29,4 +29,4 @@ const validateRegisterAndUpdateCustomer = yup.object({
   estado: yup.string().strict(),
 });
 
-module.exports = validateRegisterAndUpdateCustomer;
+module.exports = validateRegisterAndUpdateCustomer; 

@@ -25,7 +25,7 @@ const {
   registerFields,
   updateFields,
 } = require("./middlewares/md_users");
-const {
+const { 
   deleteProductById,
   registerProduct,
   listProducts,
