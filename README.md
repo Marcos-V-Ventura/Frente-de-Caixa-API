@@ -33,11 +33,11 @@ Bem-vindo à Documentação da API de Frente de Caixa! Esta API oferece uma solu
 
 ---
 
+## 👩🏻‍💻 Desenvolvimento
+
+A API Frente de Caixa foi desenvolvida com foco no conceito de clean code, priorizando a clareza e simplicidade do código. A equipe adotou práticas colaborativas com o uso do Git para controle de versão e facilitar o fluxo de trabalho. Para organização e planejamento do projeto, foi empregado o método ágil Kanban, proporcionando uma abordagem flexível e adaptativa. A documentação do projeto foi elaborada utilizando o Swagger, destacando cada endpoint e apresentando de forma clara os resultados correspondentes. Essas práticas resultaram em um desenvolvimento eficiente e transparente, promovendo a qualidade do código, a colaboração da equipe e a compreensão do projeto.
+
 ## ⚙️ Como executar o projeto
-
-### Resumo
-
-A API Frente de Caixa foi desenvolvida com foco no conceito de clean code, priorizando a clareza e simplicidade do código. A equipe adotou práticas colaborativas com o uso do Git para controle de versão e facilitar o fluxo de trabalho. Para organização e planejamento do projeto, foi empregado o método ágil Kanban, proporcionando uma abordagem flexível e adaptativa. A documentação do projeto foi elaborada utilizando o Swagger, destacando cada endpoint e apresentando de forma clara os resultados correspondentes. Esse conjunto de práticas resultou em um desenvolvimento eficiente e transparente, promovendo a qualidade do código, a colaboração da equipe e a compreensão do projeto.
 
 ### Pré-requisitos
 
