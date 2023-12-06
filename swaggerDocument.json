@@ -31,7 +31,7 @@
                 "nome": "Novo Usuario",
                 "email": "novoUsario@gmail.com",
                 "senha": "senhaSegura"
-              } 
+              }
             }
           }
         },
@@ -702,208 +702,209 @@
                 "example": {
                   "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
                 }
-              }}
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  },
-                  "examples": {
-                    "Nome_campo": {
-                      "value": {
-                        "mensagem": "Nome é um campo necessário"
-                      }
-                    },
-                    "Email_campo": {
-                      "value": {
-                        "mensagem": "Email é um campo necessário"
-                      }
-                    },
-                    "Senha_campo": {
-                      "value": {
-                        "mensagem": "Senha é um campo necessário"
-                      }
-                    },
-                    "Nome_tipo": {
-                      "value": {
-                        "mensagem": "Nome deve ser uma string"
-                      }
-                    },
-                    "Email_tipo": {
-                      "value": {
-                        "mensagem": "Email deve ser uma string"
-                      }
-                    },
-                    "Senha_tipo": {
-                      "value": {
-                        "mensagem": "Senha deve ser uma string"
-                      }
-                    },
-                    "Cep_tipo": {
-                      "value": {
-                        "mensagem": "Cep deve ser uma string"
-                      }
-                    },
-                    "Rua_tipo": {
-                      "value": {
-                        "mensagem": "Rua deve ser uma string"
-                      }
-                    },
-                    "Numero_tipo": {
-                      "value": {
-                        "mensagem": "Numero deve ser uma string"
-                      }
-                    },
-                    "Bairro_tipo": {
-                      "value": {
-                        "mensagem": "Bairro deve ser uma string"
-                      }
-                    },
-                    "Idade_tipo": {
-                      "value": {
-                        "mensagem": "Cidade deve ser uma string"
-                      }
-                    },
-                    "Estado_tipo": {
-                      "value": {
-                        "mensagem": "Estado deve ser uma string"
-                      }
-                    }
-                  }
-                }
               }
-            },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  },
-                  "example": {
-                    "mensagem": "Cliente com ID 99 não foi encontrado"
-                  }
-                }
-              }
-            },
-            "409": {
-              "description": "Conflict",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  },
-                  "example": {
-                    "mensagem": "Email e/ou CPF inválido(s)."
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal Server Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  },
-                  "example": {
-                    "mensagem": "Erro interno do servidor.",
-                    "error": "jwt malformed"
-                  }
-                }
-              }
-            
-          }}
-        },
-        "get": {
-          "summary": "Listar Cliente pelo ID",
-          "tags": ["Cliente"],
-          "description": "Lista o cliente com ID informado.",
-          "security": [
-            {
-              "bearerAuth": []
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Cliente listado com sucesso",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/cliente"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Nome_campo": {
+                    "value": {
+                      "mensagem": "Nome é um campo necessário"
+                    }
                   },
-                  "example": {
-                    "id": "1",
-                    "nome": "Novo Cliente Atualizado",
-                    "email": "novoClienteAtualizado@gmail.com",
-                    "cpf": "12345678111",
-                    "cep": "12345678111",
-                    "rua": "Rua Exemplo Atualizado",
-                    "numero": "22",
-                    "bairro": "Bairro de Exemplo Atualizado",
-                    "cidade": "Cidade de Exemplo Atualizado"
-                  }
-                }
-              }
-            },
-            "401": {
-              "description": "Unauthorized",
-              "content": {
-                "application/Json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
+                  "Email_campo": {
+                    "value": {
+                      "mensagem": "Email é um campo necessário"
+                    }
                   },
-                  "example": {
-                    "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not Found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
+                  "Senha_campo": {
+                    "value": {
+                      "mensagem": "Senha é um campo necessário"
+                    }
                   },
-                  "example": {
-                    "mensagem": "Cliente com ID 99 não foi encontrado"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal Server Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
+                  "Nome_tipo": {
+                    "value": {
+                      "mensagem": "Nome deve ser uma string"
+                    }
                   },
-                  "example": {
-                    "mensagem": "Erro interno do servidor.",
-                    "error": "jwt malformed"
+                  "Email_tipo": {
+                    "value": {
+                      "mensagem": "Email deve ser uma string"
+                    }
+                  },
+                  "Senha_tipo": {
+                    "value": {
+                      "mensagem": "Senha deve ser uma string"
+                    }
+                  },
+                  "Cep_tipo": {
+                    "value": {
+                      "mensagem": "Cep deve ser uma string"
+                    }
+                  },
+                  "Rua_tipo": {
+                    "value": {
+                      "mensagem": "Rua deve ser uma string"
+                    }
+                  },
+                  "Numero_tipo": {
+                    "value": {
+                      "mensagem": "Numero deve ser uma string"
+                    }
+                  },
+                  "Bairro_tipo": {
+                    "value": {
+                      "mensagem": "Bairro deve ser uma string"
+                    }
+                  },
+                  "Idade_tipo": {
+                    "value": {
+                      "mensagem": "Cidade deve ser uma string"
+                    }
+                  },
+                  "Estado_tipo": {
+                    "value": {
+                      "mensagem": "Estado deve ser uma string"
+                    }
                   }
                 }
               }
             }
           },
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "required": true,
-              "schema": {
-                "type": "integer",
-                "minimum": 1
-              },
-              "description": "Id do cliente que deseja listar."
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Cliente com ID 99 não foi encontrado"
+                }
+              }
             }
-          ]
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Email e/ou CPF inválido(s)."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
         }
       },
+      "get": {
+        "summary": "Listar Cliente pelo ID",
+        "tags": ["Cliente"],
+        "description": "Lista o cliente com ID informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente listado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cliente"
+                },
+                "example": {
+                  "id": "1",
+                  "nome": "Novo Cliente Atualizado",
+                  "email": "novoClienteAtualizado@gmail.com",
+                  "cpf": "12345678111",
+                  "cep": "12345678111",
+                  "rua": "Rua Exemplo Atualizado",
+                  "numero": "22",
+                  "bairro": "Bairro de Exemplo Atualizado",
+                  "cidade": "Cidade de Exemplo Atualizado"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/Json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Para acessar este recurso um token de autenticação válido deve ser enviado"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Cliente com ID 99 não foi encontrado"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "mensagem": "Erro interno do servidor.",
+                  "error": "jwt malformed"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Id do cliente que deseja listar."
+          }
+        ]
+      }
+    },
     "/produto": {
       "post": {
         "summary": "Criação de um novo produto",
@@ -1974,13 +1975,13 @@
             "type": "string"
           }
         }
-      },
-      "securitySchemes": {
-        "bearerAuth": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
-        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
