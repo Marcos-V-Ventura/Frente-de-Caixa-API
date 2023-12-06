@@ -10,6 +10,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(swaggerRouter);
-app.use(router);
+app.use(router); 
 
 module.exports = app;

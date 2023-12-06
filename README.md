@@ -60,7 +60,10 @@ $ npm install
 # Execute a aplicação em modo de desenvolvimento
 $ npm run dev
 
-# O servidor inciará na porta:3000 - acesse http://localhost:3000 para obter toda a documentação do projeto.
+# O servidor inciará na porta:3000
+
+# Acesse o Swagger (Documentação da API) em
+GET http://localhost:3000
 ```
 
 ## 🛣️ Endpoints
