@@ -1,10 +1,11 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Projeto Final Cubos",
+    "title": "Frente de Caixa API",
     "description": "API para um PDV (Frente de Caixa).",
     "contact": {
-      "url": "https://github.com/vitorhvieira"
+      "url": "https://github.com/Marcos-V-Ventura",
+      "name": "Desenvolvedor"
     },
     "version": "1.0.0"
   },
