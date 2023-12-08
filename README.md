@@ -42,8 +42,14 @@ A API Frente de Caixa foi desenvolvida com foco no conceito de clean code, prior
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
-Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), [postgreSQL](https://www.postgresql.org/download/).
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/).
+
+Caso deseje se aprofundar no Swagger, ferramenta usada para documentar esta API, confira a documentação oficial em [Documentação do Swagger](https://swagger.io/docs/specification/about/).
+
+#### 💾 Criando o Banco de Dados local
+
+Abra seu gerenciador SQL de banco de dados favorito, copie e execute o script do arquivo dump.sql para criar as tabelas e inserir os dados iniciais no banco de dados local.
 
 #### 🎲 Rodando o Backend
 
@@ -65,6 +71,10 @@ $ npm run dev
 # Acesse o Swagger (Documentação da API) em
 GET http://localhost:3000
 ```
+
+#### 🗃️ Variáveis de ambiente
+
+Consulte as variáveis necessárias no arquivo .env.example, e atribua valores de acordo com suas informações pessoais.
 
 ## 🛣️ Endpoints
 
