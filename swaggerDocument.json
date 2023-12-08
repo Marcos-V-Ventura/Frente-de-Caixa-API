@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://calm-teal-lamb-gown.cyclic.app",
+      "url": "http://localhost:3000",
       "description": "Servidor para testes localmente."
     }
   ],
