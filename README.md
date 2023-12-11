@@ -262,7 +262,7 @@ Esse endpoint cadastrar um novo cliente no sistema.
   "numero": "111",
   "bairro": "Bairro de Exemplo",
   "cidade": "Cidade de Exemplo",
-  "estado": "Esgtado de Exemplo"
+  "estado": "Estado de Exemplo"
 }
 ```
 
@@ -301,7 +301,7 @@ Esse endpoint edita um cliente no sistema.
   "numero": "111",
   "bairro": "Bairro de Exemplo",
   "cidade": "Cidade de Exemplo",
-  "estado": "Esgtado de Exemplo"
+  "estado": "Estado de Exemplo"
 }
 ```
 
